@@ -1,10 +1,23 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-import citiesData from './data/citiesData.json';
 
-const LIMIT = 8;
+import citiesData from './data/citiesData.json';
+import { LIMIT, AppRoute } from './const';
 
 function App() {
-  return <MainPage limit={LIMIT} data={citiesData} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Root}
+          element={<MainPage data={citiesData} limit={LIMIT} />}
+        />
+        <Route path={AppRoute.Login} />
+        <Route path={AppRoute.Favorites} />
+        <Route path={AppRoute.Offer} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

@@ -2,11 +2,24 @@ import { City } from '../../../types/City';
 
 type PlaceCardProps = {
   data: City;
+  isActive: boolean;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
 };
 
-function PlaceCard({ data }: PlaceCardProps) {
+function PlaceCard({
+  data,
+  isActive,
+  onHoverStart,
+  onHoverEnd,
+}: PlaceCardProps) {
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      style={isActive ? { border: 'red solid 1px' } : {}}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>

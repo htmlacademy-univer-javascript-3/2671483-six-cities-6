@@ -1,6 +1,10 @@
-import { City } from '../../../types/City';
-import { Orientation } from '../../../types/Orientation.type';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
+
+import { AppRoute } from '../../../const';
+
+import type { City } from '../../../types/City';
+import type { Orientation } from '../../../types/Orientation.type';
 
 type PlaceCardProps = {
   data: City;
@@ -35,6 +39,8 @@ function PlaceCard({
   onHoverEnd,
 }: PlaceCardProps) {
   const currentView = viewConfig[orientation];
+
+  const offerPath = AppRoute.Offer.replace(':offerId', String(data.id));
 
   return (
     <article
@@ -82,7 +88,7 @@ function PlaceCard({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{data.title}</a>
+          <Link to={offerPath}>{data.title}</Link>
         </h2>
         <p className="place-card__type">{data.type}</p>
       </div>

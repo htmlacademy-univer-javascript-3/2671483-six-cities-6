@@ -1,40 +1,68 @@
 import { City } from '../../../types/City';
+import { Orientation } from '../../../types/Orientation.type';
+import cn from 'classnames';
 
 type PlaceCardProps = {
   data: City;
   isActive: boolean;
+  orientation?: Orientation;
   onHoverStart: () => void;
   onHoverEnd: () => void;
+};
+
+const viewConfig = {
+  vertical: {
+    cardClass: 'cities__card',
+    imageWrapperClass: 'cities__image-wrapper',
+    infoClass: '',
+    width: '260',
+    height: '200',
+  },
+  horizontal: {
+    cardClass: 'favorites__card',
+    imageWrapperClass: 'favorites__image-wrapper',
+    infoClass: 'favorites__card-info',
+    width: '150',
+    height: '110',
+  },
 };
 
 function PlaceCard({
   data,
   isActive,
+  orientation = 'vertical',
   onHoverStart,
   onHoverEnd,
 }: PlaceCardProps) {
+  const currentView = viewConfig[orientation];
+
   return (
     <article
-      className="cities__card place-card"
+      className={cn(currentView.cardClass, 'place-card')}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      style={isActive ? { border: 'red solid 1px' } : {}}
+      style={isActive ? { border: 'red solid 1px' } : {}} // Временненные стили
     >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={cn(
+          currentView.imageWrapperClass,
+          'place-card__image-wrapper'
+        )}
+      >
         <a href="#">
           <img
             className="place-card__image"
             src="img/apartment-01.jpg"
-            width="260"
-            height="200"
+            width={currentView.width}
+            height={currentView.height}
             alt="Place image"
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={cn(currentView.infoClass, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{data.price}</b>

@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
 import cn from 'classnames';
+import PlaceCard from '../../entities/PlaceCard';
 
-import PlaceCard from '../../shared/PlaceCard';
-import type { City } from '../../../types/City';
-import { Orientation } from '../../../types/Orientation.type';
+import type { City } from '../../shared/types/City';
+import type { Orientation } from '../../shared/types/Orientation.type';
 
 type OfferListProps = {
   limit: number;

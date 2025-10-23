@@ -1,4 +1,4 @@
-import { City } from '../types/City';
+import { City } from '../components/shared/types/City';
 
 export const offers: City[] = [{
   id: '14efc878-0d8a-4270-9667-bf5241632223',

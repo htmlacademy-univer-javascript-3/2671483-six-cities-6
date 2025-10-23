@@ -6,7 +6,9 @@ import OfferPage from './pages/OfferPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoute from './components/routes/PrivateRoute';
 
-import { LIMIT, AppRoute, AuthorizationStatus } from './const';
+import { LIMIT } from './components/shared/config/consts';
+import { AppRoute } from './components/shared/config/route';
+import { AuthorizationStatus } from './components/shared/config/auth-status';
 
 import { offers } from './mocks/offers';
 

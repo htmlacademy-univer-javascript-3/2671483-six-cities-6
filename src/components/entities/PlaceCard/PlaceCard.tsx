@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { AppRoute } from '../../../const';
+import { AppRoute } from '../../shared/config/route';
 
-import type { City } from '../../../types/City';
-import type { Orientation } from '../../../types/Orientation.type';
+import type { City } from '../../shared/types/City';
+import type { Orientation } from '../../shared/types/Orientation.type';
 
 type PlaceCardProps = {
   data: City;

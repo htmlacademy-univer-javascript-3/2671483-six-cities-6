@@ -1,6 +1,6 @@
 import OfferList from '../../components/widgets/OfferList';
 
-import type { City } from '../../types/City';
+import type { City } from '../../components/shared/types/City';
 
 type MainPageProps = {
   limit: number;

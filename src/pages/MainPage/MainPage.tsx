@@ -1,14 +1,13 @@
-import PlaceCard from '../../components/shared/PlaceCard';
-import { City } from '../../types/City';
+import OfferList from '../../components/widgets/OfferList';
+
+import type { City } from '../../components/shared/types/City';
 
 type MainPageProps = {
   limit: number;
-  data: City[];
+  offers: City[];
 };
 
-function MainPage({ limit, data }: MainPageProps) {
-  const limitCards = data.slice(0, limit);
-
+function MainPage({ limit, offers }: MainPageProps) {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -119,11 +118,7 @@ function MainPage({ limit, data }: MainPageProps) {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {limitCards.map((info) => (
-                  <PlaceCard key={info.id} data={info} />
-                ))}
-              </div>
+              <OfferList offers={offers} limit={limit} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

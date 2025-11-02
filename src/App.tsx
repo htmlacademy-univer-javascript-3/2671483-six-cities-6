@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-
-import citiesData from './data/citiesData.json';
-import { LIMIT, AppRoute, AuthorizationStatus } from './const';
-import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 import FavoritesPage from './pages/FavoritesPage';
 import OfferPage from './pages/OfferPage';
+import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoute from './components/routes/PrivateRoute';
+
+import { LIMIT } from './components/shared/config/consts';
+import { AppRoute } from './components/shared/config/route';
+import { AuthorizationStatus } from './components/shared/config/auth-status';
+
+import { offers } from './mocks/offers';
 
 function App() {
   return (
@@ -15,14 +18,14 @@ function App() {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage data={citiesData} limit={LIMIT} />}
+          element={<MainPage offers={offers} limit={LIMIT} />}
         />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesPage />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesPage offers={offers} limit={LIMIT} />
             </PrivateRoute>
           }
         />

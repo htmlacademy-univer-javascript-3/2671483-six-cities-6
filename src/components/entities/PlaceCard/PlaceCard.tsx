@@ -3,11 +3,11 @@ import cn from 'classnames';
 
 import { AppRoute } from '../../shared/config/route';
 
-import type { City } from '../../shared/types/City';
+import type { Offer } from '../../shared/types/Offer.type';
 import type { Orientation } from '../../shared/types/Orientation.type';
 
 type PlaceCardProps = {
-  data: City;
+  data: Offer;
   isActive: boolean;
   orientation?: Orientation;
   onHoverStart: () => void;

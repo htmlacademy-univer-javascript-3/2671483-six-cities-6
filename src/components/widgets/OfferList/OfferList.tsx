@@ -2,12 +2,12 @@ import { useCallback, useState } from 'react';
 import cn from 'classnames';
 import PlaceCard from '../../entities/PlaceCard';
 
-import type { City } from '../../shared/types/City';
+import type { Offer } from '../../shared/types/Offer.type';
 import type { Orientation } from '../../shared/types/Orientation.type';
 
 type OfferListProps = {
   limit: number;
-  offers: City[];
+  offers: Offer[];
   orientation?: Orientation;
 };
 
@@ -16,10 +16,10 @@ function OfferList({
   offers,
   orientation = 'vertical',
 }: OfferListProps) {
-  const [activeCard, setActiveCard] = useState<City['id'] | null>(null);
+  const [activeCard, setActiveCard] = useState<Offer['id'] | null>(null);
   const limitCards = offers.slice(0, limit);
 
-  const handleCardEnter = useCallback((id: City['id']) => {
+  const handleCardEnter = useCallback((id: Offer['id']) => {
     setActiveCard(id);
   }, []);
 

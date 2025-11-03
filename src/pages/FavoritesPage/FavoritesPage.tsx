@@ -1,9 +1,9 @@
 import OfferList from '../../components/widgets/OfferList';
 
-import { City } from '../../components/shared/types/City';
+import { Offer } from '../../components/shared/types/Offer.type';
 
 type FavoritesPageProps = {
-  offers: City[];
+  offers: Offer[];
   limit: number;
 };
 

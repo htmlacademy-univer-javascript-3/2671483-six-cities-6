@@ -1,33 +1,20 @@
 import { useEffect, useRef } from 'react';
 import useMap from '../model/useMap';
-import { Icon, layerGroup, Marker } from 'leaflet';
+import { layerGroup, Marker } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 import type { City, Offer } from '../../../shared/types/Offer.type';
 
-import 'leaflet/dist/leaflet.css';
-
 import {
-  URL_MARKER_CURRENT,
-  URL_MARKER_DEFAULT,
-} from '../../../shared/config/consts';
+  currentCustomIcon,
+  defaultCustomIcon,
+} from '../../../shared/lib/map-utils/map-icons';
 
 type MapProps = {
   city: City;
   points: Offer[];
   selectedPoint: Offer['id'] | undefined;
 };
-
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
 
 function Map(props: MapProps): JSX.Element {
   const { city, points, selectedPoint } = props;

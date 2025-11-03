@@ -4,6 +4,8 @@ import { Icon, layerGroup, Marker } from 'leaflet';
 
 import type { City, Offer } from '../../../shared/types/Offer.type';
 
+import 'leaflet/dist/leaflet.css';
+
 import {
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
@@ -57,7 +59,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points, selectedPoint]);
 
-  return <div ref={mapRef} style={{ height: '500px' }}></div>;
+  return <div ref={mapRef} className="cities__map map"></div>;
 }
 
 export default Map;

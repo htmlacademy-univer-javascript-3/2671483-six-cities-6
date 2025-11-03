@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import StarsRating from '../../shared/ui/StarsRating';
 
-import { MIN_COMMENT_LENGTH, RATINGS } from '../../shared/config/consts';
+import { MIN_COMMENT_LENGTH, RATINGS } from '../../shared/config/const';
 
 import type { Review } from '../../shared/types/Review.type';
 

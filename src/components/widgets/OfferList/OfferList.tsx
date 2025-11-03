@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import cn from 'classnames';
 import PlaceCard from '../../entities/PlaceCard';
 
@@ -9,23 +9,27 @@ type OfferListProps = {
   limit: number;
   offers: Offer[];
   orientation?: Orientation;
+  onListItemHover: (listItemId: string | undefined) => void;
 };
 
 function OfferList({
   limit = 6,
   offers,
   orientation = 'vertical',
+  onListItemHover,
 }: OfferListProps) {
-  const [activeCard, setActiveCard] = useState<Offer['id'] | null>(null);
   const limitCards = offers.slice(0, limit);
 
-  const handleCardEnter = useCallback((id: Offer['id']) => {
-    setActiveCard(id);
-  }, []);
+  const handleCardEnter = useCallback(
+    (id: Offer['id']) => {
+      onListItemHover(id);
+    },
+    [onListItemHover]
+  );
 
   const handleCardLeave = useCallback(() => {
-    setActiveCard(null);
-  }, []);
+    onListItemHover(undefined);
+  }, [onListItemHover]);
 
   return (
     <div
@@ -42,7 +46,6 @@ function OfferList({
           orientation={orientation}
           onHoverStart={() => handleCardEnter(info.id)}
           onHoverEnd={handleCardLeave}
-          isActive={activeCard === info.id}
         />
       ))}
     </div>

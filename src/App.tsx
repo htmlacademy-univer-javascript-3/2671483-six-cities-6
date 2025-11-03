@@ -11,6 +11,7 @@ import { AppRoute } from './components/shared/config/route';
 import { AuthorizationStatus } from './components/shared/config/auth-status';
 
 import { offers } from './mocks/offers';
+import { CITY } from './mocks/city';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage offers={offers} limit={LIMIT} />}
+          element={<MainPage offers={offers} city={CITY} limit={LIMIT} />}
         />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route

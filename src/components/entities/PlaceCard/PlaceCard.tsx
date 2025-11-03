@@ -8,7 +8,6 @@ import type { Orientation } from '../../shared/types/Orientation.type';
 
 type PlaceCardProps = {
   data: Offer;
-  isActive: boolean;
   orientation?: Orientation;
   onHoverStart: () => void;
   onHoverEnd: () => void;
@@ -33,7 +32,6 @@ const viewConfig = {
 
 function PlaceCard({
   data,
-  isActive,
   orientation = 'vertical',
   onHoverStart,
   onHoverEnd,
@@ -47,7 +45,6 @@ function PlaceCard({
       className={cn(currentView.cardClass, 'place-card')}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      style={isActive ? { border: 'red solid 1px' } : {}} // Временненные стили
     >
       <div className="place-card__mark">
         <span>Premium</span>

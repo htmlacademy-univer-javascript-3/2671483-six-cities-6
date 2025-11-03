@@ -1,13 +1,24 @@
+import { useState } from 'react';
 import OfferList from '../../components/widgets/OfferList';
+import Map from '../../components/widgets/Map/ui/Map';
 
-import type { City } from '../../components/shared/types/City';
+import type { City, Offer } from '../../components/shared/types/Offer.type';
 
 type MainPageProps = {
   limit: number;
-  offers: City[];
+  offers: Offer[];
+  city: City;
 };
 
-function MainPage({ limit, offers }: MainPageProps) {
+function MainPage({ limit, offers, city }: MainPageProps) {
+  const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
+    undefined
+  );
+
+  const handlePointHover = (itemId: string | undefined) => {
+    setSelectedPoint(itemId);
+  };
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -118,10 +129,14 @@ function MainPage({ limit, offers }: MainPageProps) {
                   </li>
                 </ul>
               </form>
-              <OfferList offers={offers} limit={limit} />
+              <OfferList
+                offers={offers}
+                limit={limit}
+                onListItemHover={handlePointHover}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={city} points={offers} selectedPoint={selectedPoint} />
             </div>
           </div>
         </div>

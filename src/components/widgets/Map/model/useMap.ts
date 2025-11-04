@@ -1,9 +1,16 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import leaflet from 'leaflet';
+import leaflet, { layerGroup, Marker, Map as LMap, LayerGroup as LLayerGroup, LatLngExpression } from 'leaflet';
 
-import type { City } from '../../../shared/types/Offer.type';
+import type { City, Offer } from '../../../shared/types/Offer.type';
 
-function useMap(mapRef: MutableRefObject<HTMLDivElement | null>, city: City): leaflet.Map | null {
+import { currentCustomIcon, defaultCustomIcon } from '../../../shared/lib/map-utils/map-icons';
+
+function useMap(
+  mapRef: MutableRefObject<HTMLDivElement | null>,
+  city: City,
+  points: Offer[],
+  selectedPoint: Offer['id'] | undefined
+): LMap | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
@@ -13,7 +20,7 @@ function useMap(mapRef: MutableRefObject<HTMLDivElement | null>, city: City): le
         center: {
           lat: city.location.latitude,
           lng: city.location.longitude,
-        },
+        } as LatLngExpression,
         zoom: city.location.zoom,
       });
 
@@ -30,6 +37,30 @@ function useMap(mapRef: MutableRefObject<HTMLDivElement | null>, city: City): le
       isRenderedRef.current = true;
     }
   }, [mapRef, city]);
+
+  useEffect(() => {
+    if (map) {
+      const markerLayer: LLayerGroup = layerGroup().addTo(map);
+      points.forEach((point: Offer) => {
+        const marker: Marker = new Marker({
+          lat: point.location.latitude,
+          lng: point.location.longitude,
+        });
+
+        marker
+          .setIcon(
+            selectedPoint !== undefined && point.id === selectedPoint
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
+      });
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
+    }
+  }, [map, points, selectedPoint]);
 
   return map;
 }

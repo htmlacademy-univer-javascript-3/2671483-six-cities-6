@@ -9,7 +9,7 @@ type OfferListProps = {
   limit: number;
   offers: Offer[];
   orientation?: Orientation;
-  onListItemHover: (listItemId: string | undefined) => void;
+  onListItemHover?: (listItemId: string | undefined) => void;
 };
 
 function OfferList({
@@ -22,13 +22,17 @@ function OfferList({
 
   const handleCardEnter = useCallback(
     (id: Offer['id']) => {
-      onListItemHover(id);
+      if (onListItemHover) {
+        onListItemHover(id);
+      }
     },
     [onListItemHover]
   );
 
   const handleCardLeave = useCallback(() => {
-    onListItemHover(undefined);
+    if (onListItemHover) {
+      onListItemHover(undefined);
+    }
   }, [onListItemHover]);
 
   return (

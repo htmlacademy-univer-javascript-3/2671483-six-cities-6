@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import OfferList from '../../widgets/OfferList';
 import Map from '../../widgets/Map/ui/Map';
+import { Header } from '../../widgets/Header';
+import { CitySelector } from '../../features/CitySelector';
+import { SortOffers } from '../../features/SortOffers';
 
 import type { City, Offer } from '../../shared/types/Offer.type';
-import { Header } from '../../widgets/Header';
-import SortOffers from '../../features/SortOffers/ui/SortOffers';
 
 type MainPageProps = {
   limit: number;
@@ -24,44 +25,10 @@ function MainPage({ limit, offers, city }: MainPageProps) {
   return (
     <div className="page page--gray page--main">
       <Header />
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitySelector />
         </div>
         <div className="cities">
           <div className="cities__places-container container">

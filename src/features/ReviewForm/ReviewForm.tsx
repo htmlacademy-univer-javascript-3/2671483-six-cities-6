@@ -1,20 +1,22 @@
 import { useState } from 'react';
-import StarsRating from '../../shared/ui/StarsRating';
+import RatingInput from '../../shared/ui/RatingInput';
 
 import { MIN_COMMENT_LENGTH, RATINGS } from '../../shared/config/const';
 
-import type { Review } from '../../shared/types/Review.type';
+import type { ReviewData } from '../../shared/types/Review.type';
 
-const INITIAL_REVIEW_FORM_DATA: Review = { comment: '', rating: '0' };
+const INITIAL_REVIEW_FORM_DATA: ReviewData = { comment: '', rating: 0 };
 
 function ReviewForm() {
-  const [formData, setFormData] = useState<Review>(INITIAL_REVIEW_FORM_DATA);
+  const [formData, setFormData] = useState<ReviewData>(
+    INITIAL_REVIEW_FORM_DATA
+  );
 
   const handleChangeField = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target;
-    setFormData({ ...formData, [name as keyof Review]: value });
+    setFormData({ ...formData, [name as keyof ReviewData]: value });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +25,7 @@ function ReviewForm() {
   };
 
   const isDisabled =
-    formData.rating === '0' || formData.comment.length < MIN_COMMENT_LENGTH;
+    formData.rating === 0 || formData.comment.length < MIN_COMMENT_LENGTH;
 
   return (
     <form className="reviews__form form" method="post" onSubmit={handleSubmit}>
@@ -32,7 +34,7 @@ function ReviewForm() {
       </label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map(({ value, title }) => (
-          <StarsRating
+          <RatingInput
             key={value}
             value={value}
             title={title}

@@ -2,12 +2,12 @@ import { RatingValue } from '../../types/Review.type';
 
 type StarsRatingProps = {
   value: RatingValue;
-  title: string;
+  title?: string;
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function StarsRating({ value, title, checked, onChange }: StarsRatingProps) {
+function RatingInput({ value, title, checked, onChange }: StarsRatingProps) {
   const id = `${value}-stars`;
 
   return (
@@ -34,4 +34,4 @@ function StarsRating({ value, title, checked, onChange }: StarsRatingProps) {
   );
 }
 
-export default StarsRating;
+export default RatingInput;

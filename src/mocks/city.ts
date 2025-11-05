@@ -1,4 +1,4 @@
-import type { City } from '../components/shared/types/Offer.type';
+import type { City } from '../shared/types/Offer.type';
 
 export const CITY: City = {
   name: 'Amsterdam',

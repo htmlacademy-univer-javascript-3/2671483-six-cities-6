@@ -1,6 +1,6 @@
-import OfferList from '../../components/widgets/OfferList';
+import OfferList from '../../widgets/OfferList';
 
-import { Offer } from '../../components/shared/types/Offer.type';
+import { Offer } from '../../shared/types/Offer.type';
 
 type FavoritesPageProps = {
   offers: Offer[];

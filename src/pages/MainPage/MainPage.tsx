@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import OfferList from '../../components/widgets/OfferList';
-import Map from '../../components/widgets/Map/ui/Map';
+import OfferList from '../../widgets/OfferList';
+import Map from '../../widgets/Map/ui/Map';
 
-import type { City, Offer } from '../../components/shared/types/Offer.type';
+import type { City, Offer } from '../../shared/types/Offer.type';
 
 type MainPageProps = {
   limit: number;

@@ -1,4 +1,4 @@
-import ReviewForm from '../../components/features/ReviewForm';
+import ReviewForm from '../../features/ReviewForm';
 
 function OfferPage() {
   return (

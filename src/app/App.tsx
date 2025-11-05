@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
-import FavoritesPage from './pages/FavoritesPage';
-import OfferPage from './pages/OfferPage';
-import NotFoundPage from './pages/NotFoundPage';
-import PrivateRoute from './components/routes/PrivateRoute';
+import MainPage from '../pages/MainPage';
+import LoginPage from '../pages/LoginPage';
+import FavoritesPage from '../pages/FavoritesPage';
+import OfferPage from '../pages/OfferPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import PrivateRoute from './routes/PrivateRoute';
 
-import { LIMIT } from './components/shared/config/const';
-import { AppRoute } from './components/shared/config/route';
-import { AuthorizationStatus } from './components/shared/config/auth-status';
+import { LIMIT } from '../shared/config/const';
+import { AppRoute } from '../shared/config/route';
+import { AuthorizationStatus } from '../shared/config/auth-status';
 
-import { offers } from './mocks/offers';
-import { CITY } from './mocks/city';
+import { offers } from '../mocks/offers';
+import { CITY } from '../mocks/city';
 
 function App() {
   return (

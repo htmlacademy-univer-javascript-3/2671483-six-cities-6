@@ -1,4 +1,4 @@
-import { Offer } from '../components/shared/types/Offer.type';
+import { Offer } from '../shared/types/Offer.type';
 
 export const offers: Offer[] = [{
   id: '14efc878-0d8a-4270-9667-bf5241632223',

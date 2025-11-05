@@ -1,7 +1,8 @@
-import { Review } from '../../entities/Review';
-import ReviewForm from '../../features/ReviewForm';
-import { comments } from '../../mocks/comments';
 import { Header } from '../../widgets/Header';
+import ReviewForm from '../../features/ReviewForm';
+import ReviewList from '../../widgets/ReviewList/ui/ReviewList';
+
+import { comments } from '../../mocks/comments';
 
 function OfferPage() {
   return (
@@ -137,12 +138,7 @@ function OfferPage() {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">1</span>
-                </h2>
-                <ul className="reviews__list">
-                  <Review data={comments[0]} />
-                </ul>
+                <ReviewList reviews={comments} />
                 <ReviewForm />
               </section>
             </div>

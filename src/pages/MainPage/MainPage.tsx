@@ -43,7 +43,12 @@ function MainPage({ limit, offers, city }: MainPageProps) {
               />
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} selectedPoint={selectedPoint} />
+              <Map
+                block="cities"
+                city={city}
+                points={offers}
+                selectedPoint={selectedPoint}
+              />
             </div>
           </div>
         </div>

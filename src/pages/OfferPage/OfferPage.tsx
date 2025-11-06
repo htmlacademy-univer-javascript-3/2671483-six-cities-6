@@ -3,6 +3,9 @@ import ReviewForm from '../../features/ReviewForm';
 import ReviewList from '../../widgets/ReviewList/ui/ReviewList';
 
 import { comments } from '../../mocks/comments';
+import Map from '../../widgets/Map/ui';
+import { CITY } from '../../mocks/city';
+import { offersNearby } from '../../mocks/offers-nearby';
 
 function OfferPage() {
   return (
@@ -143,7 +146,12 @@ function OfferPage() {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            block="offer"
+            city={CITY}
+            points={offersNearby}
+            selectedPoint={'ff'}
+          />
         </section>
         <div className="container">
           <section className="near-places places">

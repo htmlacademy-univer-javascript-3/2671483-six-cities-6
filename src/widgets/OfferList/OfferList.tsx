@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import PlaceCard from '../../entities/PlaceCard';
+import { PlaceCard } from '../../entities/PlaceCard';
 
 import type { Offer } from '../../shared/types/Offer.type';
 import type { Orientation } from '../../shared/types/Orientation.type';
@@ -41,7 +41,7 @@ function OfferList({
       {limitCards.map((info) => (
         <PlaceCard
           key={info.id}
-          data={info}
+          offer={info}
           orientation={orientation}
           onHoverStart={() => handleCardEnter(info.id)}
           onHoverEnd={handleCardLeave}

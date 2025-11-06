@@ -1,20 +1,31 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Map from '../../widgets/Map/ui';
 import { Header } from '../../widgets/Header';
 import OfferList from '../../widgets/OfferList';
 import ReviewList from '../../widgets/ReviewList/ui/ReviewList';
 import ReviewForm from '../../features/ReviewForm';
+import { OfferGallery } from '../../entities/offer/ui/OfferGallery';
 
 import type { Offer } from '../../shared/types/Offer.type';
 
 import { CITY } from '../../mocks/city';
 import { comments } from '../../mocks/comments';
 import { offersNearby } from '../../mocks/offers-nearby';
+import { fullOffers } from '../../mocks/fullOffers';
 
 function OfferPage() {
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
     undefined
   );
+
+  const { offerId } = useParams();
+
+  let images = fullOffers.find((offer) => offer.id === offerId)?.images;
+
+  if (!images) {
+    images = [];
+  }
 
   const handlePointHover = (itemId: string | undefined) => {
     setSelectedPoint(itemId);
@@ -25,52 +36,7 @@ function OfferPage() {
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
-          <div className="offer__gallery-container container">
-            <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-            </div>
-          </div>
+          <OfferGallery images={images} />
           <div className="offer__container container">
             <div className="offer__wrapper">
               <div className="offer__mark">

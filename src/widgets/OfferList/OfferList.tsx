@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import cn from 'classnames';
 import PlaceCard from '../../entities/PlaceCard';
 
 import type { Offer } from '../../shared/types/Offer.type';
 import type { Orientation } from '../../shared/types/Orientation.type';
 
 type OfferListProps = {
+  className?: string;
   limit: number;
   offers: Offer[];
   orientation?: Orientation;
@@ -13,6 +13,7 @@ type OfferListProps = {
 };
 
 function OfferList({
+  className,
   limit = 6,
   offers,
   orientation = 'vertical',
@@ -36,13 +37,7 @@ function OfferList({
   }, [onListItemHover]);
 
   return (
-    <div
-      className={cn(
-        orientation === 'vertical'
-          ? 'cities__places-list places__list tabs__content'
-          : 'favorites__places'
-      )}
-    >
+    <div className={className}>
       {limitCards.map((info) => (
         <PlaceCard
           key={info.id}

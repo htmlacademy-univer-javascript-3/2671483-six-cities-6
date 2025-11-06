@@ -37,6 +37,7 @@ function MainPage({ limit, offers, city }: MainPageProps) {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortOffers />
               <OfferList
+                className="cities__places-list places__list tabs__content"
                 offers={offers}
                 limit={limit}
                 onListItemHover={handlePointHover}

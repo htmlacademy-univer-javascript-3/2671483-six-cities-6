@@ -20,7 +20,7 @@ export const offersNearby = [
     isFavorite: false,
     isPremium: false,
     rating: 4,
-    previewImage: 'https://url-to-image/image.png'
+    previewImage: 'img/apartment-02.jpg'
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f02',
@@ -66,6 +66,6 @@ export const offersNearby = [
     isFavorite: false,
     isPremium: false,
     rating: 4,
-    previewImage: 'https://url-to-image/image.png'
+    previewImage: 'img/apartment-01.jpg'
   }
 ];

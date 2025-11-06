@@ -1,13 +1,11 @@
 import { User } from './User.type';
 
-export type RatingValue = 0 | 1 | 2 | 3 | 4 | 5;
-
 export interface IReview {
   id: string;
   date: string;
   user: User;
   comment: string;
-  rating: RatingValue;
+  rating: number;
 }
 
 export interface ReviewData {
@@ -16,6 +14,6 @@ export interface ReviewData {
 }
 
 export interface RatingTitle {
-  value: RatingValue;
+  value: number;
   title: string;
 }

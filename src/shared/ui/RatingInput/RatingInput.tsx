@@ -1,7 +1,5 @@
-import { RatingValue } from '../../types/Review.type';
-
 type StarsRatingProps = {
-  value: RatingValue;
+  value: number;
   title?: string;
   checked: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

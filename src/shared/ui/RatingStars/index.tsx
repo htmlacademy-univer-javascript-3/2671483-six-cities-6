@@ -1,7 +1,5 @@
-import { RatingValue } from '../../types/Review.type';
-
 type RatingStarsProps = {
-  rating: RatingValue;
+  rating: number;
 };
 
 function RatingStars({ rating }: RatingStarsProps): JSX.Element {

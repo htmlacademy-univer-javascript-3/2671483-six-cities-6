@@ -1,16 +1,24 @@
+import cn from 'classnames';
+import { viewConfig } from '../config/viewConfig';
 import { useFavorites } from '../model/useFavorites';
 
-export function BookmarkButton() {
+type BookmarkButtonProps = {
+  block?: 'place-card' | 'offer';
+};
+
+export function BookmarkButton({ block = 'place-card' }: BookmarkButtonProps) {
   const { isActive, toggleFavorite } = useFavorites();
+
+  const { buttonClass, buttonClassActive, iconClass, width, height } =
+    viewConfig[block];
+
   return (
     <button
-      className={`place-card__bookmark-button${
-        isActive ? '--active' : ''
-      } button`}
+      className={cn(buttonClass, isActive && buttonClassActive)}
       type="button"
       onClick={toggleFavorite}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={iconClass} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>

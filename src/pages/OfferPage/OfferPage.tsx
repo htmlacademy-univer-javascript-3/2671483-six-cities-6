@@ -13,6 +13,8 @@ import { CITY } from '../../mocks/city';
 import { comments } from '../../mocks/comments';
 import { offersNearby } from '../../mocks/offers-nearby';
 import { fullOffers } from '../../mocks/fullOffers';
+import { Mark, RatingStars } from '../../shared/ui';
+import { BookmarkButton } from '../../features/Favorites';
 
 function OfferPage() {
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
@@ -21,7 +23,9 @@ function OfferPage() {
 
   const { offerId } = useParams();
 
-  let images = fullOffers.find((offer) => offer.id === offerId)?.images;
+  const offerData = fullOffers.find((offer) => offer.id === offerId);
+
+  let images = offerData?.images;
 
   if (!images) {
     images = [];
@@ -39,27 +43,14 @@ function OfferPage() {
           <OfferGallery images={images} />
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {offerData?.isPremium && <Mark>Premium</Mark>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   Beautiful &amp; luxurious studio at great location
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton block="offer" />
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
+              <RatingStars rating={offerData?.rating} block="offer" withValue />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   Apartment

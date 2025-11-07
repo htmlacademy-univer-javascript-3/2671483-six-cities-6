@@ -1,12 +1,13 @@
 import { ReactNode } from 'react';
 
 type MarkProps = {
+  className?: string;
   children: ReactNode;
 };
 
-export function Mark({ children }: MarkProps) {
+export function Mark({ children, className }: MarkProps) {
   return (
-    <mark className="place-card__mark">
+    <mark className={className}>
       <span>{children}</span>
     </mark>
   );

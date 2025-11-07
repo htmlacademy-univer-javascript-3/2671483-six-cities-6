@@ -1,14 +1,23 @@
 type RatingStarsProps = {
-  rating: number;
+  rating?: number;
+  withValue?: boolean;
+  block?: 'place-card' | 'offer' | 'reviews';
 };
 
-function RatingStars({ rating }: RatingStarsProps): JSX.Element {
+function RatingStars({
+  rating = 0,
+  withValue = false,
+  block = 'reviews',
+}: RatingStarsProps): JSX.Element {
   return (
-    <div className="reviews__rating rating">
-      <div className="reviews__stars rating__stars">
+    <div className={`${block}__rating rating`}>
+      <div className={`${block}__stars rating__stars`}>
         <span style={{ width: `${rating * 20}%` }}></span>
         <span className="visually-hidden">Rating</span>
       </div>
+      {withValue && (
+        <span className={`${block}__rating-value rating__value`}>{rating}</span>
+      )}
     </div>
   );
 }

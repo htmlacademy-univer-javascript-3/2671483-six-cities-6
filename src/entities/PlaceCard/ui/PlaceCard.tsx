@@ -33,7 +33,7 @@ export function PlaceCard({
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
     >
-      <Mark>Premium</Mark>
+      {offer.isPremium && <Mark className="place-card__mark">Premium</Mark>}
       <PlaceCardImage
         className={cn(
           currentView.imageWrapperClass,

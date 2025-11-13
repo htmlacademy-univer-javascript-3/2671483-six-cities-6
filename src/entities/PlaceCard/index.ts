@@ -1,1 +1,2 @@
-export { default } from './PlaceCard';
+export { PlaceCard } from './ui/PlaceCard';
+

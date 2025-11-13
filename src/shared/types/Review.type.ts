@@ -1,11 +1,19 @@
-export type RatingValue = '0' | '1' | '2' | '3' | '4' | '5';
+import { User } from './User.type';
 
-export interface Review {
+export interface IReview {
+  id: string;
+  date: string;
+  user: User;
   comment: string;
-  rating: RatingValue;
+  rating: number;
+}
+
+export interface ReviewData {
+  comment: string;
+  rating: number;
 }
 
 export interface RatingTitle {
-  value: RatingValue;
+  value: number;
   title: string;
 }

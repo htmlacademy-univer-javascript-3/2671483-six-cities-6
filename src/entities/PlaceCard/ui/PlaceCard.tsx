@@ -46,7 +46,7 @@ export function PlaceCard({
       />
       <div className={cn(currentView.infoClass, 'place-card__info')}>
         <div className="place-card__price-wrapper">
-          <Price>{offer.price}</Price>
+          <Price block="place-card">{offer.price}</Price>
           <BookmarkButton />
         </div>
         <RatingStars rating={offer.rating} />

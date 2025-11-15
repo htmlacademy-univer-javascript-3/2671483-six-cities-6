@@ -7,7 +7,7 @@ import { useFilteredOffers } from '../model/useFilteredOffers';
 
 type OfferListProps = {
   className?: string;
-  limit: number;
+  limit?: number;
   orientation?: Orientation;
   onListItemHover?: (listItemId: string | undefined) => void;
 };

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Map from '../../widgets/Map/ui';
 import { Header } from '../../widgets/Header';
-import OfferList from '../../widgets/OfferList';
 import ReviewList from '../../widgets/ReviewList/ui/ReviewList';
 import ReviewForm from '../../features/ReviewForm';
 import { OfferGallery } from '../../entities/offer/ui/OfferGallery';
@@ -15,6 +14,7 @@ import { offersNearby } from '../../mocks/offers-nearby';
 import { fullOffers } from '../../mocks/fullOffers';
 import { Mark, RatingStars } from '../../shared/ui';
 import { BookmarkButton } from '../../features/Favorites';
+import { OfferListWrapper } from '../../widgets/OfferListWrapper';
 
 function OfferPage() {
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
@@ -123,17 +123,7 @@ function OfferPage() {
           />
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-              Other places in the neighbourhood
-            </h2>
-            <OfferList
-              className="near-places__list places__list"
-              limit={3}
-              offers={offersNearby}
-              onListItemHover={handlePointHover}
-            />
-          </section>
+          <OfferListWrapper block="nearby" onListItemHover={handlePointHover} />
         </div>
       </main>
     </div>

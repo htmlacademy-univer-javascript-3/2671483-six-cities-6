@@ -1,14 +1,12 @@
 import OfferList from '../../widgets/OfferList';
 
-import { Offer } from '../../shared/types/Offer.type';
 import { Header } from '../../widgets/Header';
 
 type FavoritesPageProps = {
-  offers: Offer[];
   limit: number;
 };
 
-function FavoritesPage({ offers, limit }: FavoritesPageProps) {
+function FavoritesPage({ limit }: FavoritesPageProps) {
   return (
     <div className="page">
       <Header />
@@ -26,11 +24,7 @@ function FavoritesPage({ offers, limit }: FavoritesPageProps) {
                     </a>
                   </div>
                 </div>
-                <OfferList
-                  offers={offers}
-                  limit={limit}
-                  orientation="horizontal"
-                />
+                <OfferList limit={limit} orientation="horizontal" />
               </li>
             </ul>
           </section>

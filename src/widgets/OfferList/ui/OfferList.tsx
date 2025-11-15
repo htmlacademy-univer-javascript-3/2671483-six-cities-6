@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
-import { PlaceCard } from '../../entities/PlaceCard';
+import { PlaceCard } from '../../../entities/PlaceCard';
 
-import type { Offer } from '../../shared/types/Offer.type';
-import type { Orientation } from '../../shared/types/Orientation.type';
+import type { Offer } from '../../../shared/types/Offer.type';
+import type { Orientation } from '../../../shared/types/Orientation.type';
+import { useFilteredOffers } from '../model/useFilteredOffers';
 
 type OfferListProps = {
   className?: string;
   limit: number;
-  offers: Offer[];
   orientation?: Orientation;
   onListItemHover?: (listItemId: string | undefined) => void;
 };
@@ -15,10 +15,10 @@ type OfferListProps = {
 function OfferList({
   className,
   limit = 6,
-  offers,
   orientation = 'vertical',
   onListItemHover,
 }: OfferListProps) {
+  const { offers } = useFilteredOffers();
   const limitCards = offers.slice(0, limit);
 
   const handleCardEnter = useCallback(

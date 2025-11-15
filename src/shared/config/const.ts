@@ -9,6 +9,8 @@ export const ALL_CITIES = [
   'Dusseldorf',
 ] as const;
 
+export const DEFAULT_CITY: typeof ALL_CITIES[number] = 'Paris';
+
 export const LIMIT = 8;
 
 export const MIN_COMMENT_LENGTH = 50;

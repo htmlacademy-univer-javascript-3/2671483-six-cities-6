@@ -18,4 +18,6 @@ export const CitySelectorSlice = createSlice({
   }
 });
 
+export const { changeCity} = CitySelectorSlice.actions;
+
 export const citySelectorReducer = CitySelectorSlice.reducer;

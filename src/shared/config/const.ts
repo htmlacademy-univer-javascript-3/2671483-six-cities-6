@@ -1,5 +1,14 @@
 import { RatingTitle } from '../types/Review.type';
 
+export const ALL_CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+] as const;
+
 export const LIMIT = 8;
 
 export const MIN_COMMENT_LENGTH = 50;

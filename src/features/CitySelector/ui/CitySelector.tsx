@@ -1,7 +1,7 @@
 import { useCitySelector } from '../model/useCitySelector';
 
 function CitySelector(): JSX.Element {
-  const { cities, activeCity, handleCityChange } = useCitySelector();
+  const { cities, selectedCity, onCityChange } = useCitySelector();
 
   return (
     <section className="locations container">
@@ -10,11 +10,11 @@ function CitySelector(): JSX.Element {
           <li
             key={city}
             className="locations__item"
-            onClick={() => handleCityChange(city)}
+            onClick={() => onCityChange(city)}
           >
             <a
               className={`locations__item-link tabs__item ${
-                city === activeCity ? 'tabs__item--active' : ''
+                city === selectedCity ? 'tabs__item--active' : ''
               }`}
               href="#"
             >

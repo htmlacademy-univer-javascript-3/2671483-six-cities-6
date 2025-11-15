@@ -34,3 +34,5 @@ export interface Location {
   longitude: number;
   zoom: number;
 }
+
+export type Offers = Offer[];

@@ -26,7 +26,7 @@ function App() {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesPage offers={offers} limit={LIMIT} />
+              <FavoritesPage limit={LIMIT} />
             </PrivateRoute>
           }
         />

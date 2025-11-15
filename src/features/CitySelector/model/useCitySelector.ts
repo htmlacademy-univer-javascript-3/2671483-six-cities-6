@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../shared/lib/hooks/redux';
+import { changeCity } from './citySelectorSlice';
 
+import { ALL_CITIES } from '../../../shared/config/const';
+import { offers } from '../../../mocks/offers';
+import { setOffersList } from '../../../entities/offer/model/offersListSlice';
 
 export function useCitySelector() {
-  const [activeCity, setActiveCity] = useState<typeof cities[number]>('Amsterdam');
+  const dispatch = useAppDispatch();
+  const selectedCity = useAppSelector((state) => state.city.city);
 
-  const cities = [
-    'Paris',
-    'Cologne',
-    'Brussels',
-    'Amsterdam',
-    'Hamburg',
-    'Dusseldorf',
-  ] as const;
+  const onCityChange = (cityName: typeof ALL_CITIES[number]) => {
+    dispatch(changeCity(cityName));
 
-  const handleCityChange = (city: typeof cities[number]) => {
-    setActiveCity(city);
+    const offersForSelectedCity = offers.filter((offer) => offer.city.name === cityName);
+
+    dispatch(setOffersList(offersForSelectedCity));
   };
 
-  return {cities, activeCity, handleCityChange};
+  return {cities: ALL_CITIES, selectedCity, onCityChange};
 }

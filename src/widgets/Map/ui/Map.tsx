@@ -2,12 +2,10 @@ import { CSSProperties, useRef } from 'react';
 import useMap from '../model/useMap';
 import 'leaflet/dist/leaflet.css';
 
-import type { City, Offer } from '../../../shared/types/Offer.type';
+import type { Offer } from '../../../shared/types/Offer.type';
 
 type MapProps = {
   block: 'cities' | 'offer';
-  city: City;
-  points: Offer[];
   selectedPoint: Offer['id'] | undefined;
 };
 
@@ -20,11 +18,11 @@ const mapStyles: CSSProperties = {
 };
 
 function Map(props: MapProps): JSX.Element {
-  const { block, city, points, selectedPoint } = props;
+  const { block, selectedPoint } = props;
 
   const mapRef = useRef(null);
 
-  useMap(mapRef, city, points, selectedPoint);
+  useMap(mapRef, selectedPoint);
 
   return <div ref={mapRef} className={`${block}__map map`} style={mapStyles} />;
 }

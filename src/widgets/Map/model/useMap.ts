@@ -1,27 +1,32 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import leaflet, { layerGroup, Marker, Map as LMap, LayerGroup as LLayerGroup, LatLngExpression } from 'leaflet';
 
-import type { City, Offer } from '../../../shared/types/Offer.type';
+import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
 
 import { currentCustomIcon, defaultCustomIcon } from '../../../shared/lib/map-utils/map-icons';
+import { useAppSelector } from '../../../shared/lib/hooks/redux';
+
+const getCurrentCity = (points: Offers): City => points[0].city;
 
 function useMap(
   mapRef: MutableRefObject<HTMLDivElement | null>,
-  city: City,
-  points: Offer[],
   selectedPoint: Offer['id'] | undefined
 ): LMap | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
+  const points: Offers = useAppSelector((state) => state.offerList.list);
+
+  const currentCity = getCurrentCity(points);
+
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude,
+          lat: currentCity.location.latitude,
+          lng: currentCity.location.longitude,
         } as LatLngExpression,
-        zoom: city.location.zoom,
+        zoom: currentCity.location.zoom,
       });
 
       leaflet
@@ -36,10 +41,11 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, currentCity]);
 
   useEffect(() => {
     if (map) {
+      map.setView([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
       const markerLayer: LLayerGroup = layerGroup().addTo(map);
       points.forEach((point: Offer) => {
         const marker: Marker = new Marker({
@@ -60,7 +66,7 @@ function useMap(
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, currentCity]);
 
   return map;
 }

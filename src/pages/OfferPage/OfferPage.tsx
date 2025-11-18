@@ -8,9 +8,7 @@ import { OfferGallery } from '../../entities/offer/ui/OfferGallery';
 
 import type { Offer } from '../../shared/types/Offer.type';
 
-import { CITY } from '../../mocks/city';
 import { comments } from '../../mocks/comments';
-import { offersNearby } from '../../mocks/offers-nearby';
 import { fullOffers } from '../../mocks/fullOffers';
 import { Mark, RatingStars } from '../../shared/ui';
 import { BookmarkButton } from '../../features/Favorites';
@@ -115,12 +113,7 @@ function OfferPage() {
               </section>
             </div>
           </div>
-          <Map
-            block="offer"
-            city={CITY}
-            points={offersNearby}
-            selectedPoint={selectedPoint}
-          />
+          <Map block="offer" selectedPoint={selectedPoint} />
         </section>
         <div className="container">
           <OfferListWrapper block="nearby" onListItemHover={handlePointHover} />

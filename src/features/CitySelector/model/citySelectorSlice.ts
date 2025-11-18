@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../../../shared/config/const';
 
 interface CitySelectorState {
-  city: string;
+  city: typeof DEFAULT_CITY[number];
 }
 
 const INITAL_STATE: CitySelectorState = {

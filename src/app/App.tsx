@@ -10,17 +10,11 @@ import { LIMIT } from '../shared/config/const';
 import { AppRoute } from '../shared/config/route';
 import { AuthorizationStatus } from '../shared/config/auth-status';
 
-import { offers } from '../mocks/offers';
-import { CITY } from '../mocks/city';
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={AppRoute.Root}
-          element={<MainPage offers={offers} city={CITY} limit={LIMIT} />}
-        />
+        <Route path={AppRoute.Root} element={<MainPage limit={LIMIT} />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           path={AppRoute.Favorites}

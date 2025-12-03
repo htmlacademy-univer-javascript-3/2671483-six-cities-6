@@ -1,24 +1,11 @@
 import { useSortOffers } from '../model/useSortOffers';
 
 import { SORT_OPTIONS } from '../../../shared/config/const';
-import { CSSProperties } from 'react';
+import { getArrowStyles } from '../lib/styles';
 
 function SortOffers() {
   const { isOpen, activeSort, handleToggle, handleSelect } = useSortOffers();
-
-  const arrowStyles = (): CSSProperties => {
-    const initialTranslate = 'translateY(-50%)';
-
-    const combinnedTransform = `${initialTranslate} rotateX(${
-      isOpen ? '0deg' : '180deg'
-    })`;
-
-    return {
-      transition: 'transform 0.3s ease',
-      transform: combinnedTransform,
-      transformOrigin: 'center',
-    };
-  };
+  const arrowStyles = getArrowStyles(isOpen);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -31,7 +18,7 @@ function SortOffers() {
         {activeSort}
         <svg
           className="places__sorting-arrow"
-          style={arrowStyles()}
+          style={arrowStyles}
           width="7"
           height="4"
         >

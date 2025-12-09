@@ -1,12 +1,21 @@
+import leaflet, {
+  LatLngExpression,
+  layerGroup,
+  LayerGroup as LLayerGroup,
+  Map as LMap,
+  Marker,
+} from 'leaflet';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import leaflet, { layerGroup, Marker, Map as LMap, LayerGroup as LLayerGroup, LatLngExpression } from 'leaflet';
 
 import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
 
-import { currentCustomIcon, defaultCustomIcon } from '../../../shared/lib/map-utils/map-icons';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
+import {
+  currentCustomIcon,
+  defaultCustomIcon,
+} from '../../../shared/lib/map-utils/map-icons';
 
-const getCurrentCity = (points: Offers): City => points[0].city;
+const getCurrentCity = (points: Offers): City | undefined => points[0]?.city;
 
 function useMap(
   mapRef: MutableRefObject<HTMLDivElement | null>,
@@ -20,7 +29,7 @@ function useMap(
   const currentCity = getCurrentCity(points);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current !== null && !isRenderedRef.current && currentCity) {
       const instance = leaflet.map(mapRef.current, {
         center: {
           lat: currentCity.location.latitude,
@@ -33,8 +42,9 @@ function useMap(
         .tileLayer(
           'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
           {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          }
         )
         .addTo(instance);
 
@@ -44,8 +54,11 @@ function useMap(
   }, [mapRef, currentCity]);
 
   useEffect(() => {
-    if (map) {
-      map.setView([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
+    if (map && currentCity) {
+      map.setView(
+        [currentCity.location.latitude, currentCity.location.longitude],
+        currentCity.location.zoom
+      );
       const markerLayer: LLayerGroup = layerGroup().addTo(map);
       points.forEach((point: Offer) => {
         const marker: Marker = new Marker({

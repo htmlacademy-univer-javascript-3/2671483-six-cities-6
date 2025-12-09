@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { PlaceCard } from '../../../entities/PlaceCard';
 
+import { useAppSelector } from '../../../shared/lib/hooks/redux';
 import type { Offer } from '../../../shared/types/Offer.type';
 import type { Orientation } from '../../../shared/types/Orientation.type';
 import { useFilteredOffers } from '../model/useFilteredOffers';
@@ -18,6 +19,7 @@ function OfferList({
   orientation = 'vertical',
   onListItemHover,
 }: OfferListProps) {
+  const { isLoading, hasError } = useAppSelector((state) => state.offerList);
   const { offers } = useFilteredOffers();
   const limitCards = offers.slice(0, limit);
 
@@ -35,6 +37,12 @@ function OfferList({
       onListItemHover(undefined);
     }
   }, [onListItemHover]);
+
+  if (isLoading) {
+    return <div>LOADING...</div>;
+  } else if (hasError) {
+    return <div>ERROR</div>;
+  }
 
   return (
     <div className={className}>

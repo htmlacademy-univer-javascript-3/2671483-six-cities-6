@@ -24,7 +24,9 @@ function useMap(
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
-  const points: Offers = useAppSelector((state) => state.offerList.list);
+  const points: Offers = useAppSelector(
+    (state) => state.offerList.filteredList
+  );
 
   const currentCity = getCurrentCity(points);
 

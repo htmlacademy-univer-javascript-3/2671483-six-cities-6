@@ -4,6 +4,7 @@ import { PlaceCard } from '../../../entities/PlaceCard';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
 import type { Offer } from '../../../shared/types/Offer.type';
 import type { Orientation } from '../../../shared/types/Orientation.type';
+import { Loader } from '../../../shared/ui/Loader';
 import { useFilteredOffers } from '../model/useFilteredOffers';
 
 type OfferListProps = {
@@ -39,7 +40,11 @@ function OfferList({
   }, [onListItemHover]);
 
   if (isLoading) {
-    return <div>LOADING...</div>;
+    return (
+      <div className={className}>
+        <Loader />
+      </div>
+    );
   } else if (hasError) {
     return <div>ERROR</div>;
   }

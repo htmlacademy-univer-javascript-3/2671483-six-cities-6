@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOffersAction } from './offers.thunks';
 
-import type { Offers } from '../../../shared/types/Offer.type';
-
 import { DEFAULT_CITY } from '../../../shared/config/const';
+import type { Offers } from '../../../shared/types/Offer.type';
 
 interface offersListState {
   list: Offers;
+  filteredList: Offers;
   isLoading: boolean;
   hasError: boolean;
 }
 
 const INITIAL_STATE: offersListState = {
   list: [],
+  filteredList: [],
   isLoading: false,
   hasError: false,
 };
@@ -22,7 +23,7 @@ export const offersListSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setOffersList: (state, action: PayloadAction<Offers>) => {
-      state.list = action.payload;
+      state.filteredList = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -34,7 +35,10 @@ export const offersListSlice = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.list = action.payload.filter((o) => o.city.name === DEFAULT_CITY);
+        state.list = action.payload;
+        state.filteredList = action.payload.filter(
+          (item) => item.city.name === DEFAULT_CITY
+        );
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isLoading = false;

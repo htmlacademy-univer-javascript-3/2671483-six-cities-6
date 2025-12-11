@@ -5,6 +5,6 @@ export const ApiRoute = {
   Offer: (id: string) => `offers/${id}`,
   OffersNearby: (id: string) => `/offers/${id}/nearby`,
   Favorite: '/favorite',
-  FavoriteStatus: (id: string) => `/favorite/${id}/:status`,
+  FavoriteStatus: (id: string, status: 1 | 0) => `/favorite/${id}/${status}`,
   Comments: (id: string) => `/comments/${id}`,
 } as const;

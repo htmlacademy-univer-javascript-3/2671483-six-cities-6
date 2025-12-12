@@ -2,10 +2,10 @@ import { UserNavigation } from '../../../features/UserNavigation';
 import Logo from '../../../shared/ui/Logo';
 
 type HeaderProps = {
-  showHavigation?: boolean;
+  showNavigation?: boolean;
 };
 
-function Header({ showHavigation = true }: HeaderProps): JSX.Element {
+function Header({ showNavigation = true }: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -13,7 +13,7 @@ function Header({ showHavigation = true }: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          {showHavigation && <UserNavigation />}
+          {showNavigation && <UserNavigation />}
         </div>
       </div>
     </header>

@@ -3,3 +3,16 @@ export interface User {
   avatarUrl: string;
   isPro: boolean;
 }
+
+export interface UserData {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  email: string;
+  token: string;
+}
+
+export interface AuthData {
+  login: string;
+  password: string;
+}

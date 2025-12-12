@@ -1,16 +1,25 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from '../pages/MainPage';
-import LoginPage from '../pages/LoginPage';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FavoritesPage from '../pages/FavoritesPage';
-import OfferPage from '../pages/OfferPage';
+import LoginPage from '../pages/LoginPage';
+import MainPage from '../pages/MainPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import OfferPage from '../pages/OfferPage';
 import PrivateRoute from './routes/PrivateRoute';
 
+import { fetchOffersAction } from '../entities/offer/model/offers.thunks';
+import { AuthorizationStatus } from '../shared/config/auth-status';
 import { LIMIT } from '../shared/config/const';
 import { AppRoute } from '../shared/config/route';
-import { AuthorizationStatus } from '../shared/config/auth-status';
+import { useAppDispatch } from '../shared/lib/hooks/redux';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>

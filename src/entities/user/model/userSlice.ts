@@ -3,10 +3,10 @@ import { checkAuthAction, loginAction, logoutAction } from './user.thunks';
 
 import { AuthorizationStatus } from '../../../shared/config/auth-status';
 
-import type { User } from '../../../shared/types/User.type';
+import type { UserData } from '../../../shared/types/User.type';
 
 interface UserState {
-  user: User | null;
+  user: UserData | null;
   authorizationStatus: AuthorizationStatus;
 }
 

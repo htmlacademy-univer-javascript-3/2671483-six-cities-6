@@ -1,23 +1,25 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { fetchOffersAction } from '../entities/offer/model/offers.thunks';
+import { checkAuthAction } from '../entities/user/model/user.thunks';
+import { useAppDispatch } from '../shared/lib/hooks/redux';
+import PrivateRoute from './routes/PrivateRoute';
+
 import FavoritesPage from '../pages/FavoritesPage';
 import LoginPage from '../pages/LoginPage';
 import MainPage from '../pages/MainPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import OfferPage from '../pages/OfferPage';
-import PrivateRoute from './routes/PrivateRoute';
 
-import { fetchOffersAction } from '../entities/offer/model/offers.thunks';
-import { AuthorizationStatus } from '../shared/config/auth-status';
 import { LIMIT } from '../shared/config/const';
 import { AppRoute } from '../shared/config/route';
-import { useAppDispatch } from '../shared/lib/hooks/redux';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOffersAction());
+    dispatch(checkAuthAction());
   }, [dispatch]);
 
   return (
@@ -25,14 +27,12 @@ function App() {
       <Routes>
         <Route path={AppRoute.Root} element={<MainPage limit={LIMIT} />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesPage limit={LIMIT} />
-            </PrivateRoute>
-          }
-        />
+        <Route element={<PrivateRoute />}>
+          <Route
+            path={AppRoute.Favorites}
+            element={<FavoritesPage limit={LIMIT} />}
+          />
+        </Route>
         <Route path={AppRoute.Offer} element={<OfferPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

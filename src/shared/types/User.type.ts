@@ -13,6 +13,6 @@ export interface UserData {
 }
 
 export interface AuthData {
-  login: string;
+  email: string;
   password: string;
 }

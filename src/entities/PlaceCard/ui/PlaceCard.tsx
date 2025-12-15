@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { PlaceCardImage } from './PlaceCardImage';
+import { Link } from 'react-router-dom';
 import { BookmarkButton } from '../../../features/Favorites';
-import { Mark, Price, RatingStars } from '../../../shared/ui';
 import { getOfferPath } from '../../../shared/lib/getOfferPath';
+import { Mark, Price, RatingStars } from '../../../shared/ui';
+import { PlaceCardImage } from './PlaceCardImage';
 
 import { viewConfig } from '../config/viewConfig';
 
@@ -13,8 +13,8 @@ import type { Orientation } from '../../../shared/types/Orientation.type';
 type PlaceCardProps = {
   offer: Offer;
   orientation?: Orientation;
-  onHoverStart: () => void;
-  onHoverEnd: () => void;
+  onHoverStart?: () => void;
+  onHoverEnd?: () => void;
 };
 
 export function PlaceCard({

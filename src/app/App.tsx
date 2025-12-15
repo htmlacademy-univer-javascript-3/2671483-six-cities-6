@@ -28,10 +28,7 @@ function App() {
         <Route path={AppRoute.Root} element={<MainPage limit={LIMIT} />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route element={<PrivateRoute />}>
-          <Route
-            path={AppRoute.Favorites}
-            element={<FavoritesPage limit={LIMIT} />}
-          />
+          <Route path={AppRoute.Favorites} element={<FavoritesPage />} />
         </Route>
         <Route path={AppRoute.Offer} element={<OfferPage />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -1,33 +1,27 @@
-import OfferList from '../../widgets/OfferList';
-
+import { useEffect } from 'react';
+import { fetchFavoritesAction } from '../../features/Favorites/model/favorites.thunks';
+import { useAppDispatch } from '../../shared/lib/hooks/redux';
+import { FavoritesList } from '../../widgets/FavoritesList';
 import { Header } from '../../widgets/Header';
 
-type FavoritesPageProps = {
-  limit: number;
-};
+// type FavoritesPageProps = {
+//   limit: number;
+// };
 
-function FavoritesPage({ limit }: FavoritesPageProps) {
+function FavoritesPage() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
+
   return (
     <div className="page">
       <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <OfferList limit={limit} orientation="horizontal" />
-              </li>
-            </ul>
-          </section>
+          <FavoritesList />
         </div>
       </main>
       <footer className="footer container">

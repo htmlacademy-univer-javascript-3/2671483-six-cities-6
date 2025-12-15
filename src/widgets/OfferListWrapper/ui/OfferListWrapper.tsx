@@ -32,6 +32,7 @@ export function OfferListWrapper(props: OfferListWrapperProps): JSX.Element {
         </>
       )}
       <OfferList
+        offers={offers}
         className={listClasses}
         limit={limit}
         onListItemHover={onListItemHover}

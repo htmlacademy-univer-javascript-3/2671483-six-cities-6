@@ -41,7 +41,7 @@ export function OfferDetails({
       <OfferGallery images={offer.images} />
       <div className="offer__container container">
         <div className="offer__wrapper">
-          {offer.isPremium && <Mark>Premium</Mark>}
+          {offer.isPremium && <Mark className="offer__mark">Premium</Mark>}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{offer.title}</h1>
             <BookmarkButton block="offer" />

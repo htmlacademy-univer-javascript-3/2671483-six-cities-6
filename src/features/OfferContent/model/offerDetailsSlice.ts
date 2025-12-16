@@ -3,6 +3,7 @@ import { fetchOfferDataAction } from './offer-details.thunks';
 
 import type { FullOffer, Offers } from '../../../shared/types/Offer.type';
 import { IReview } from '../../../shared/types/Review.type';
+import { postReviewAction } from '../../ReviewForm/model/review.thunks';
 
 interface currentOfferState {
   offer: FullOffer | null;
@@ -45,6 +46,9 @@ export const offerDetailsSlice = createSlice({
       .addCase(fetchOfferDataAction.rejected, (state) => {
         state.isLoading = false;
         state.hasError = true;
+      })
+      .addCase(postReviewAction.fulfilled, (state, action) => {
+        state.reviews.push(action.payload);
       });
   },
 });

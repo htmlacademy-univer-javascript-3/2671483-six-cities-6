@@ -1,34 +1,21 @@
-import { useState } from 'react';
-import RatingInput from '../../shared/ui/RatingInput';
+import RatingInput from '../../../shared/ui/RatingInput';
+import { useReviewForm } from '../model/useReviewForm';
 
-import { MIN_COMMENT_LENGTH, RATINGS } from '../../shared/config/const';
+import { MIN_COMMENT_LENGTH, RATINGS } from '../../../shared/config/const';
 
-import type { ReviewData } from '../../shared/types/Review.type';
-
-const INITIAL_REVIEW_FORM_DATA: ReviewData = { comment: '', rating: 0 };
+import { useParams } from 'react-router-dom';
 
 function ReviewForm() {
-  const [formData, setFormData] = useState<ReviewData>(
-    INITIAL_REVIEW_FORM_DATA
-  );
-
-  const handleChangeField = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { value, name } = event.target;
-    setFormData({ ...formData, [name as keyof ReviewData]: value });
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFormData(INITIAL_REVIEW_FORM_DATA);
-  };
-
-  const isDisabled =
-    formData.rating === 0 || formData.comment.length < MIN_COMMENT_LENGTH;
+  const { offerId } = useParams();
+  const { comment, rating, isValid, isPending, handleChange, handleSubmit } =
+    useReviewForm(offerId as string);
 
   return (
-    <form className="reviews__form form" method="post" onSubmit={handleSubmit}>
+    <form
+      className="reviews__form form"
+      method="post"
+      onSubmit={(event) => void handleSubmit(event)}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -38,8 +25,8 @@ function ReviewForm() {
             key={value}
             value={value}
             title={title}
-            checked={formData.rating === value}
-            onChange={handleChangeField}
+            checked={rating === value}
+            onChange={handleChange}
           />
         ))}
       </div>
@@ -48,8 +35,8 @@ function ReviewForm() {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData.comment}
-        onChange={handleChangeField}
+        value={comment}
+        onChange={handleChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -64,7 +51,7 @@ function ReviewForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isDisabled}
+          disabled={!isValid || isPending}
         >
           Submit
         </button>

@@ -41,7 +41,7 @@ function OfferPage() {
         <Loader />
       ) : (
         <main className="page__main page__main--offer">
-          <OfferDetails selectedPoint={selectedPoint} />
+          <OfferDetails points={offers} selectedPoint={selectedPoint} />
           <div className="container">
             <OfferListWrapper
               limit={3}

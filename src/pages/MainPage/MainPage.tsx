@@ -13,8 +13,9 @@ type MainPageProps = {
 };
 
 function MainPage({ limit }: MainPageProps) {
-  const offers = useAppSelector((state) => state.offerList.list);
+  const offers = useAppSelector((state) => state.offerList.filteredList);
   const { isLoading } = useAppSelector((state) => state.offerList);
+  const selectedCity = useAppSelector((state) => state.city.city);
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
     undefined
   );
@@ -38,12 +39,17 @@ function MainPage({ limit }: MainPageProps) {
             <div className="cities__places-container container">
               <OfferListWrapper
                 offers={offers}
+                selectedCity={selectedCity}
                 block="main"
                 limit={limit}
                 onListItemHover={handlePointHover}
               />
               <div className="cities__right-section">
-                <Map block="cities" selectedPoint={selectedPoint} />
+                <Map
+                  points={offers}
+                  block="cities"
+                  selectedPoint={selectedPoint}
+                />
               </div>
             </div>
           </div>

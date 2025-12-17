@@ -9,7 +9,6 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
 
-import { useAppSelector } from '../../../shared/lib/hooks/redux';
 import {
   currentCustomIcon,
   defaultCustomIcon,
@@ -18,15 +17,12 @@ import {
 const getCurrentCity = (points: Offers): City | undefined => points[0]?.city;
 
 function useMap(
+  points: Offers,
   mapRef: MutableRefObject<HTMLDivElement | null>,
   selectedPoint: Offer['id'] | undefined
 ): LMap | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
-
-  const points: Offers = useAppSelector(
-    (state) => state.offerList.filteredList
-  );
 
   const currentCity = getCurrentCity(points);
 

@@ -1,19 +1,23 @@
 import { OfferGallery } from '../../../entities/offer/ui/OfferGallery';
 import { AuthorizationStatus } from '../../../shared/config/auth-status';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
-import { Offer } from '../../../shared/types/Offer.type';
-import { Mark, Price, RatingStars } from '../../../shared/ui';
+import type { Offer, Offers } from '../../../shared/types/Offer.type';
 import { Loader } from '../../../shared/ui/Loader';
 import Map from '../../../widgets/Map/ui';
 import ReviewList from '../../../widgets/ReviewList/ui/ReviewList';
 import { BookmarkButton } from '../../Favorites';
 import ReviewForm from '../../ReviewForm';
 
+import { getLimitedPoints } from '../../../shared/lib/utils';
+import { Mark, Price, RatingStars } from '../../../shared/ui';
+
 type OfferDetailsProps = {
+  points: Offers;
   selectedPoint: Offer['id'] | undefined;
 };
 
 export function OfferDetails({
+  points,
   selectedPoint,
 }: OfferDetailsProps): JSX.Element {
   const { isLoading, hasError, offer, reviews } = useAppSelector(
@@ -35,6 +39,8 @@ export function OfferDetails({
   if (hasError || offer === null) {
     return <p>Failed to load Offer</p>;
   }
+
+  const limitedPoints = getLimitedPoints(3, points);
 
   return (
     <section className="offer">
@@ -103,7 +109,8 @@ export function OfferDetails({
           </section>
         </div>
       </div>
-      <Map block="offer" selectedPoint={selectedPoint} />;
+      <Map points={limitedPoints} block="offer" selectedPoint={selectedPoint} />
+      ;
     </section>
   );
 }

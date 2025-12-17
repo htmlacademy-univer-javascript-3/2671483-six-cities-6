@@ -1,16 +1,21 @@
 import { useState } from 'react';
-import Map from '../../widgets/Map/ui/Map';
-import { Header } from '../../widgets/Header';
-import { OfferListWrapper } from '../../widgets/OfferListWrapper';
 import { CitySelector } from '../../features/CitySelector';
+import { Header } from '../../widgets/Header';
+import Map from '../../widgets/Map/ui/Map';
+import { OfferListWrapper } from '../../widgets/OfferListWrapper';
 
+import { useAppSelector } from '../../shared/lib/hooks/redux';
 import type { Offer } from '../../shared/types/Offer.type';
+import { Loader } from '../../shared/ui/Loader';
 
 type MainPageProps = {
   limit: number;
 };
 
 function MainPage({ limit }: MainPageProps) {
+  const offers = useAppSelector((state) => state.offerList.filteredList);
+  const { isLoading } = useAppSelector((state) => state.offerList);
+  const selectedCity = useAppSelector((state) => state.city.city);
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
     undefined
   );
@@ -27,18 +32,28 @@ function MainPage({ limit }: MainPageProps) {
         <div className="tabs">
           <CitySelector />
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <OfferListWrapper
-              block="main"
-              limit={limit}
-              onListItemHover={handlePointHover}
-            />
-            <div className="cities__right-section">
-              <Map block="cities" selectedPoint={selectedPoint} />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="cities">
+            <div className="cities__places-container container">
+              <OfferListWrapper
+                offers={offers}
+                selectedCity={selectedCity}
+                block="main"
+                limit={limit}
+                onListItemHover={handlePointHover}
+              />
+              <div className="cities__right-section">
+                <Map
+                  points={offers}
+                  block="cities"
+                  selectedPoint={selectedPoint}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );

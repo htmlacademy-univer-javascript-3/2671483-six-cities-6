@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { fetchOffersAction } from '../entities/offer/model/offers.thunks';
 import { checkAuthAction } from '../entities/user/model/user.thunks';
 import { useAppDispatch } from '../shared/lib/hooks/redux';
@@ -31,7 +31,8 @@ function App() {
           <Route path={AppRoute.Favorites} element={<FavoritesPage />} />
         </Route>
         <Route path={AppRoute.Offer} element={<OfferPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate to={AppRoute.NotFound} />} />
       </Routes>
     </BrowserRouter>
   );

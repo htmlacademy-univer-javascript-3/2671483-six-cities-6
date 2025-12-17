@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { BookmarkButton } from '../../../features/Favorites';
-import { getOfferPath } from '../../../shared/lib/getOfferPath';
+import { getOfferPath } from '../../../shared/lib/utils';
 import { Mark, Price, RatingStars } from '../../../shared/ui';
 import { PlaceCardImage } from './PlaceCardImage';
 

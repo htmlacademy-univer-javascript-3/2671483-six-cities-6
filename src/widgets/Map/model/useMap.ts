@@ -7,19 +7,22 @@ import leaflet, {
 } from 'leaflet';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
-import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
+import type { MapPoint } from '../../../shared/types/Map.type';
+import type { City, Offer } from '../../../shared/types/Offer.type';
 
 import {
   currentCustomIcon,
   defaultCustomIcon,
 } from '../../../shared/lib/map-utils/map-icons';
 
-const getCurrentCity = (points: Offers): City | undefined => points[0]?.city;
+const getCurrentCity = (points: MapPoint[]): City | undefined =>
+  points[0]?.city;
 
 function useMap(
-  points: Offers,
+  points: MapPoint[],
   mapRef: MutableRefObject<HTMLDivElement | null>,
-  selectedPoint: Offer['id'] | undefined
+  selectedPoint: Offer['id'] | undefined,
+  activePoint?: MapPoint
 ): LMap | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
@@ -53,22 +56,28 @@ function useMap(
 
   useEffect(() => {
     if (map && currentCity) {
+      const allPoints = activePoint ? [...points, activePoint] : points;
+
       map.setView(
         [currentCity.location.latitude, currentCity.location.longitude],
         currentCity.location.zoom
       );
+
       const markerLayer: LLayerGroup = layerGroup().addTo(map);
-      points.forEach((point: Offer) => {
+
+      allPoints.forEach((point: MapPoint) => {
         const marker: Marker = new Marker({
           lat: point.location.latitude,
           lng: point.location.longitude,
         });
 
+        const isCurrentActive = activePoint && point.id === activePoint.id;
+        const isHovered =
+          selectedPoint !== undefined && point.id === selectedPoint;
+
         marker
           .setIcon(
-            selectedPoint !== undefined && point.id === selectedPoint
-              ? currentCustomIcon
-              : defaultCustomIcon
+            isCurrentActive || isHovered ? currentCustomIcon : defaultCustomIcon
           )
           .addTo(markerLayer);
       });
@@ -77,7 +86,7 @@ function useMap(
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint, currentCity]);
+  }, [map, activePoint, points, selectedPoint, currentCity]);
 
   return map;
 }

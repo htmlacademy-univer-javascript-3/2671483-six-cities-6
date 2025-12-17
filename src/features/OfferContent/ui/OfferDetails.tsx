@@ -109,7 +109,12 @@ export function OfferDetails({
           </section>
         </div>
       </div>
-      <Map points={limitedPoints} block="offer" selectedPoint={selectedPoint} />
+      <Map
+        activePoint={offer}
+        points={limitedPoints}
+        block="offer"
+        selectedPoint={selectedPoint}
+      />
       ;
     </section>
   );

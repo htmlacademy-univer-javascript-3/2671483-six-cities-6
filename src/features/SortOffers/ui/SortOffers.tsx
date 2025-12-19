@@ -1,5 +1,6 @@
 import { useSortOffers } from '../model/useSortOffers';
 
+import { memo } from 'react';
 import { SORT_OPTIONS } from '../../../shared/config/const';
 import { getArrowStyles } from '../lib/styles';
 
@@ -43,4 +44,6 @@ function SortOffers() {
   );
 }
 
-export default SortOffers;
+const MemoizedSortOffers = memo(SortOffers);
+
+export default MemoizedSortOffers;

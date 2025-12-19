@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CitySelector } from '../../features/CitySelector';
 import { Header } from '../../widgets/Header';
 import Map from '../../widgets/Map/ui/Map';
@@ -20,9 +20,14 @@ function MainPage({ limit }: MainPageProps) {
     undefined
   );
 
-  const handlePointHover = (itemId: string | undefined) => {
-    setSelectedPoint(itemId);
-  };
+  const currentCity = offers.length > 0 ? offers[0].city : undefined;
+
+  const handlePointHover = useCallback(
+    (itemId: string | undefined) => {
+      setSelectedPoint(itemId);
+    },
+    [setSelectedPoint]
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -46,6 +51,7 @@ function MainPage({ limit }: MainPageProps) {
               />
               <div className="cities__right-section">
                 <Map
+                  currentCity={currentCity}
                   points={offers}
                   block="cities"
                   selectedPoint={selectedPoint}

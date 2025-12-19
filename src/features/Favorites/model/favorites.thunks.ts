@@ -23,7 +23,7 @@ export const toggleFavoriteAction = createAsyncThunk<
   ToggleFavoritesArgs,
   ExtraType
 >('favorites/toggleFavorite', async ({ offerId, status }, { extra: api }) => {
-  const { data } = await api.put<Offer>(
+  const { data } = await api.post<Offer>(
     ApiRoute.FavoriteStatus(offerId, status),
     { offerId, status }
   );

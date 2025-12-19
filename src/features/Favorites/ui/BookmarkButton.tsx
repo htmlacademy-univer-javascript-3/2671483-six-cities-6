@@ -1,20 +1,27 @@
 import cn from 'classnames';
+import { Offer } from '../../../shared/types/Offer.type';
 import { viewConfig } from '../config/viewConfig';
 import { useFavorites } from '../model/useFavorites';
 
 type BookmarkButtonProps = {
+  offerId: Offer['id'];
+  isFavorite: 0 | 1;
   block?: 'place-card' | 'offer';
 };
 
-export function BookmarkButton({ block = 'place-card' }: BookmarkButtonProps) {
-  const { isActive, toggleFavorite } = useFavorites();
+export function BookmarkButton({
+  offerId,
+  isFavorite,
+  block = 'place-card',
+}: BookmarkButtonProps) {
+  const { toggleFavorite } = useFavorites(offerId, isFavorite);
 
   const { buttonClass, buttonClassActive, iconClass, width, height } =
     viewConfig[block];
 
   return (
     <button
-      className={cn(buttonClass, isActive && buttonClassActive)}
+      className={cn(buttonClass, isFavorite && buttonClassActive)}
       type="button"
       onClick={toggleFavorite}
     >

@@ -5,7 +5,7 @@ export interface Offer {
   price: number;
   city: City;
   location: Location;
-  isFavorite: boolean;
+  isFavorite: 0 | 1;
   isPremium: boolean;
   rating: number;
   previewImage: string;

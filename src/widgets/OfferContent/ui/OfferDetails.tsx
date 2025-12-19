@@ -26,7 +26,11 @@ function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
         {offer.isPremium && <Mark className="offer__mark">Premium</Mark>}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">{offer.title}</h1>
-          <BookmarkButton block="offer" />
+          <BookmarkButton
+            offerId={offer.id}
+            isFavorite={offer.isFavorite}
+            block="offer"
+          />
         </div>
         <RatingStars rating={offer.rating} block="offer" withValue />
         <ul className="offer__features">

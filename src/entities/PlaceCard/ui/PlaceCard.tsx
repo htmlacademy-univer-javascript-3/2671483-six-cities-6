@@ -48,7 +48,7 @@ function PlaceCard({
       <div className={cn(currentView.infoClass, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <Price block="place-card">{offer.price}</Price>
-          <BookmarkButton />
+          <BookmarkButton offerId={offer.id} isFavorite={offer.isFavorite} />
         </div>
         <RatingStars rating={offer.rating} />
         <h2 className="place-card__name">

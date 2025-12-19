@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { OfferDetails } from '../../features/OfferContent';
-import { fetchOfferDataAction } from '../../features/OfferContent/model/offer-details.thunks';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks/redux';
 import { Header } from '../../widgets/Header';
+import { OfferContent } from '../../widgets/OfferContent';
+import { fetchOfferDataAction } from '../../widgets/OfferContent/model/offer-details.thunks';
 import { OfferListWrapper } from '../../widgets/OfferListWrapper';
 
 import { AppRoute } from '../../shared/config/route';
@@ -26,9 +26,9 @@ function OfferPage() {
     undefined
   );
 
-  const handlePointHover = (itemId: string | undefined) => {
+  const handlePointHover = useCallback((itemId: string | undefined) => {
     setSelectedPoint(itemId);
-  };
+  }, []);
 
   if (hasError) {
     return <Navigate to={AppRoute.NotFound} replace />;
@@ -41,7 +41,7 @@ function OfferPage() {
         <Loader />
       ) : (
         <main className="page__main page__main--offer">
-          <OfferDetails points={offers} selectedPoint={selectedPoint} />
+          <OfferContent points={offers} selectedPoint={selectedPoint} />
           <div className="container">
             <OfferListWrapper
               limit={3}

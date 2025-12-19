@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchOfferDataAction } from './offer-details.thunks';
 
+import { postReviewAction } from '../../../features/ReviewForm/model/review.thunks';
 import type { FullOffer, Offers } from '../../../shared/types/Offer.type';
 import { IReview } from '../../../shared/types/Review.type';
-import { postReviewAction } from '../../ReviewForm/model/review.thunks';
 
 interface currentOfferState {
   offer: FullOffer | null;

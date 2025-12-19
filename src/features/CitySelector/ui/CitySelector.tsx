@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useCitySelector } from '../model/useCitySelector';
 
 function CitySelector(): JSX.Element {
@@ -12,14 +13,13 @@ function CitySelector(): JSX.Element {
             className="locations__item"
             onClick={() => onCityChange(city)}
           >
-            <a
+            <span
               className={`locations__item-link tabs__item ${
                 city === selectedCity ? 'tabs__item--active' : ''
               }`}
-              href="#"
             >
               <span>{city}</span>
-            </a>
+            </span>
           </li>
         ))}
       </ul>
@@ -27,4 +27,6 @@ function CitySelector(): JSX.Element {
   );
 }
 
-export default CitySelector;
+const MemoizedCitySelector = memo(CitySelector);
+
+export default MemoizedCitySelector;

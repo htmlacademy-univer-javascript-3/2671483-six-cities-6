@@ -1,10 +1,10 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, memo } from 'react';
 
 type InputWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-export function InputWrapper(props: InputWrapperProps): JSX.Element {
+function InputWrapper(props: InputWrapperProps): JSX.Element {
   const { label, ...attributes } = props;
 
   return (
@@ -14,3 +14,7 @@ export function InputWrapper(props: InputWrapperProps): JSX.Element {
     </div>
   );
 }
+
+const MemoizedInputWrapper = memo(InputWrapper);
+
+export { MemoizedInputWrapper as InputWrapper };

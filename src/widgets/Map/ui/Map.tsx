@@ -1,11 +1,12 @@
 import 'leaflet/dist/leaflet.css';
-import { CSSProperties, useRef } from 'react';
+import { CSSProperties, memo, useRef } from 'react';
 import useMap from '../model/useMap';
 
 import type { MapPoint } from '../../../shared/types/Map.type';
-import type { Offer, Offers } from '../../../shared/types/Offer.type';
+import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
 
 type MapProps = {
+  currentCity?: City;
   activePoint?: MapPoint;
   points: Offers;
   block: 'cities' | 'offer';
@@ -21,13 +22,23 @@ const mapStyles: CSSProperties = {
 };
 
 function Map(props: MapProps): JSX.Element {
-  const { activePoint, points, block, selectedPoint } = props;
+  const { currentCity, activePoint, points, block, selectedPoint } = props;
 
   const mapRef = useRef(null);
 
-  useMap(points, mapRef, selectedPoint, activePoint);
+  useMap(points, mapRef, selectedPoint, activePoint, currentCity);
 
   return <div ref={mapRef} className={`${block}__map map`} style={mapStyles} />;
 }
 
-export default Map;
+const areEqual = (prevProps: MapProps, nextProps: MapProps) =>
+  prevProps.selectedPoint === nextProps.selectedPoint &&
+  prevProps.currentCity?.location.latitude ===
+    nextProps.currentCity?.location.latitude &&
+  prevProps.currentCity?.location.longitude ===
+    nextProps.currentCity?.location.longitude &&
+  prevProps.points.length === nextProps.points.length;
+
+const MemoizedMap = memo(Map, areEqual);
+
+export default MemoizedMap;

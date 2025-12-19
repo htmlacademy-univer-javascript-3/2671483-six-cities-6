@@ -15,28 +15,26 @@ import {
   defaultCustomIcon,
 } from '../../../shared/lib/map-utils/map-icons';
 
-const getCurrentCity = (points: MapPoint[]): City | undefined =>
-  points[0]?.city;
-
 function useMap(
   points: MapPoint[],
   mapRef: MutableRefObject<HTMLDivElement | null>,
   selectedPoint: Offer['id'] | undefined,
-  activePoint?: MapPoint
+  activePoint?: MapPoint,
+  currentCity?: City
 ): LMap | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
-  const currentCity = getCurrentCity(points);
+  const location = currentCity?.location;
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current && currentCity) {
+    if (mapRef.current !== null && !isRenderedRef.current && location) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: currentCity.location.latitude,
-          lng: currentCity.location.longitude,
+          lat: location.latitude,
+          lng: location.longitude,
         } as LatLngExpression,
-        zoom: currentCity.location.zoom,
+        zoom: location.zoom,
       });
 
       leaflet
@@ -52,18 +50,18 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, currentCity]);
+  }, [mapRef, location]);
 
   useEffect(() => {
-    if (map && currentCity) {
-      const allPoints = activePoint ? [...points, activePoint] : points;
+    if (map && location) {
+      map.setView([location.latitude, location.longitude], location.zoom);
+    }
+  }, [location, map]);
 
-      map.setView(
-        [currentCity.location.latitude, currentCity.location.longitude],
-        currentCity.location.zoom
-      );
-
+  useEffect(() => {
+    if (map) {
       const markerLayer: LLayerGroup = layerGroup().addTo(map);
+      const allPoints = activePoint ? [...points, activePoint] : points;
 
       allPoints.forEach((point: MapPoint) => {
         const marker: Marker = new Marker({
@@ -86,7 +84,7 @@ function useMap(
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, activePoint, points, selectedPoint, currentCity]);
+  }, [map, activePoint, points, selectedPoint]);
 
   return map;
 }

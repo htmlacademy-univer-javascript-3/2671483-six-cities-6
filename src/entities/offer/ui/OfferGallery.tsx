@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type OfferGalleryProps = {
   images: string[];
 };
 
-export function OfferGallery({ images }: OfferGalleryProps): JSX.Element {
+function OfferGallery({ images }: OfferGalleryProps): JSX.Element {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
@@ -15,3 +17,7 @@ export function OfferGallery({ images }: OfferGalleryProps): JSX.Element {
     </div>
   );
 }
+
+const MemoizedOfferGallery = memo(OfferGallery);
+
+export { MemoizedOfferGallery as OfferGallery };

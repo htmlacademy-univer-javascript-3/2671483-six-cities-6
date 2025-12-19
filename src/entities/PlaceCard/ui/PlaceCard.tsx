@@ -7,6 +7,7 @@ import { PlaceCardImage } from './PlaceCardImage';
 
 import { viewConfig } from '../config/viewConfig';
 
+import { memo } from 'react';
 import type { Offer } from '../../../shared/types/Offer.type';
 import type { Orientation } from '../../../shared/types/Orientation.type';
 
@@ -17,7 +18,7 @@ type PlaceCardProps = {
   onHoverEnd?: () => void;
 };
 
-export function PlaceCard({
+function PlaceCard({
   offer,
   orientation = 'vertical',
   onHoverStart,
@@ -58,3 +59,7 @@ export function PlaceCard({
     </article>
   );
 }
+
+const MemoizedPlaceCard = memo(PlaceCard);
+
+export { MemoizedPlaceCard as PlaceCard };

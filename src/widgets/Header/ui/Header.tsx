@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { UserNavigation } from '../../../features/UserNavigation';
 import Logo from '../../../shared/ui/Logo';
 
@@ -20,4 +21,6 @@ function Header({ showNavigation = true }: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+const MemoizedHeader = memo(Header);
+
+export default MemoizedHeader;

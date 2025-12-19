@@ -7,6 +7,7 @@ import { OffersCount } from '../../../shared/ui/OffersCount';
 
 import { viewConfig } from '../config/viewConfig';
 
+import { memo } from 'react';
 import type { Offers } from '../../../shared/types/Offer.type';
 
 type OfferListWrapperProps = {
@@ -17,7 +18,7 @@ type OfferListWrapperProps = {
   onListItemHover?: (listItemId: string | undefined) => void;
 };
 
-export function OfferListWrapper(props: OfferListWrapperProps): JSX.Element {
+function OfferListWrapper(props: OfferListWrapperProps): JSX.Element {
   const { offers, block, limit, selectedCity, onListItemHover } = props;
 
   const isMainBlock = block === 'main';
@@ -45,3 +46,7 @@ export function OfferListWrapper(props: OfferListWrapperProps): JSX.Element {
     </section>
   );
 }
+
+const MemoizedOfferListWrapper = memo(OfferListWrapper);
+
+export { MemoizedOfferListWrapper as OfferListWrapper };

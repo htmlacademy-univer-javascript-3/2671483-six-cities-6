@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setOffersList } from '../../../entities/offer/model/offersListSlice';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
-import { getSortedOffers } from './sort-utils';
 import { changeSortOption } from './sortOffersSlice';
 
 import { SORT_OPTIONS } from '../../../shared/config/const';
@@ -10,7 +8,6 @@ import { SORT_OPTIONS } from '../../../shared/config/const';
 export function useSortOffers() {
   const dispatch = useDispatch();
   const activeSort = useAppSelector((state) => state.sortOffers.sortOption);
-  const offers = useAppSelector((state) => state.offerList.filteredList);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -20,16 +17,13 @@ export function useSortOffers() {
 
   const handleSelect = useCallback(
     (option: (typeof SORT_OPTIONS)[number]) => {
-      if (option === activeSort) {
-        setIsOpen(false);
-        return;
+      if (option !== activeSort) {
+        dispatch(changeSortOption(option));
       }
 
-      dispatch(changeSortOption(option));
-      dispatch(setOffersList(getSortedOffers(offers, option)));
       setIsOpen(false);
     },
-    [dispatch, offers, activeSort]
+    [dispatch, activeSort]
   );
   return { isOpen, activeSort, handleToggle, handleSelect };
 }

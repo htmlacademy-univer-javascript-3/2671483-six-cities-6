@@ -1,4 +1,3 @@
-import { setOffersList } from '../../../entities/offer/model/offersListSlice';
 import {
   useAppDispatch,
   useAppSelector,
@@ -8,11 +7,11 @@ import { changeCity } from './citySelectorSlice';
 
 import { useCallback } from 'react';
 import { ALL_CITIES, SORT_OPTIONS } from '../../../shared/config/const';
+import { selectCurrentCity } from './citySelector.selectors';
 
 export function useCitySelector() {
   const dispatch = useAppDispatch();
-  const selectedCity = useAppSelector((state) => state.city.city);
-  const offers = useAppSelector((state) => state.offerList.list);
+  const selectedCity = useAppSelector(selectCurrentCity);
 
   const onCityChange = useCallback(
     (cityName: (typeof ALL_CITIES)[number]) => {
@@ -22,14 +21,8 @@ export function useCitySelector() {
 
       dispatch(changeSortOption(SORT_OPTIONS[0]));
       dispatch(changeCity(cityName));
-
-      const offersForSelectedCity = offers.filter(
-        (offer) => offer.city.name === cityName
-      );
-
-      dispatch(setOffersList(offersForSelectedCity));
     },
-    [dispatch, offers, selectedCity]
+    [dispatch, selectedCity]
   );
 
   return { cities: ALL_CITIES, selectedCity, onCityChange };

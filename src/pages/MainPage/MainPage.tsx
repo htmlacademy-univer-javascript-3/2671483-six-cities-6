@@ -8,6 +8,7 @@ import { CitySelector } from '../../features/CitySelector';
 import { useAppSelector } from '../../shared/lib/hooks/redux';
 import { Loader } from '../../shared/ui/Loader';
 
+import { selectSortedOffers } from '../../features/SortOffers/model/sortOffers.selectors';
 import type { Offer } from '../../shared/types/Offer.type';
 
 type MainPageProps = {
@@ -15,7 +16,7 @@ type MainPageProps = {
 };
 
 function MainPage({ limit }: MainPageProps) {
-  const offers = useAppSelector((state) => state.offerList.filteredList);
+  const offers = useAppSelector(selectSortedOffers);
   const { isLoading } = useAppSelector((state) => state.offerList);
   const selectedCity = useAppSelector((state) => state.city.city);
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(

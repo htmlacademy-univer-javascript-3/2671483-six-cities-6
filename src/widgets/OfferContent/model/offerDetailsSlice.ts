@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchOfferDataAction } from './offer-details.thunks';
 
+import { toggleFavoriteAction } from '../../../features/Favorites/model/favorites.thunks';
 import { postReviewAction } from '../../../features/ReviewForm/model/review.thunks';
 import type { FullOffer, Offers } from '../../../shared/types/Offer.type';
 import { IReview } from '../../../shared/types/Review.type';
@@ -49,6 +50,20 @@ export const offerDetailsSlice = createSlice({
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
+      })
+      .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+        const updatedOffer = action.payload;
+
+        if (state.offer && state.offer.id === updatedOffer.id) {
+          state.offer.isFavorite = updatedOffer.isFavorite;
+        }
+
+        const index = state.offersNearby.findIndex(
+          (item) => item.id === updatedOffer.id
+        );
+        if (index !== -1) {
+          state.offersNearby[index].isFavorite = updatedOffer.isFavorite;
+        }
       });
   },
 });

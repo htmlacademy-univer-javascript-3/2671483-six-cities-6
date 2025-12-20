@@ -1,1 +1,1 @@
-export {BookmarkButton} from './ui/BookmarkButton';
+export { BookmarkButton } from './ui/bookmark-button';

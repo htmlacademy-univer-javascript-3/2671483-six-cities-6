@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiRoute } from '../../../shared/config/api-route';
 
-import type { ExtraType } from '../../../shared/types/Extra.type';
-import type { Offer, Offers } from '../../../shared/types/Offer.type';
+import type { ExtraType } from '../../../shared/types/extra.type';
+import type { Offer, Offers } from '../../../shared/types/offer.type';
 
 interface ToggleFavoritesArgs {
   offerId: string;

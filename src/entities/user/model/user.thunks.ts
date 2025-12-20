@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiRoute } from '../../../shared/config/api-route';
 import { dropToken, saveToken } from '../../../shared/lib/storage/token';
 
-import type { ExtraType } from '../../../shared/types/Extra.type';
-import type { AuthData, UserData } from '../../../shared/types/User.type';
+import type { ExtraType } from '../../../shared/types/extra.type';
+import type { AuthData, UserData } from '../../../shared/types/user.type';
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ExtraType>(
   'user/checkAuth',

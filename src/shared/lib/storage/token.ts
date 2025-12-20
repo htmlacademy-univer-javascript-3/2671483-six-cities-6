@@ -1,6 +1,6 @@
 import { AUTH_TOKEN_KEY_NAME } from '../../config/app-settings';
 
-import type { Token } from '../../types/Token.type';
+import type { Token } from '../../types/token.type';
 
 export const getToken = (): Token => {
   const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);

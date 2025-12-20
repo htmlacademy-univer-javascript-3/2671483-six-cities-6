@@ -1,6 +1,6 @@
 import { formatDate } from '../../shared/lib/date';
-import type { IReview } from '../../shared/types/Review.type';
-import RatingStars from '../../shared/ui/RatingStars';
+import type { IReview } from '../../shared/types/review.type';
+import RatingStars from '../../shared/ui/rating-stars';
 
 type ReviewProps = {
   review: IReview;

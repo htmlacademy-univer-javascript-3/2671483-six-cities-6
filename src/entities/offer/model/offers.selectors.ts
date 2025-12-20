@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
-import { selectCurrentCity } from '../../../features/CitySelector/model/citySelector.selectors';
+import { selectCurrentCity } from '../../../features/city-selector/model/city-selector.selectors';
 
 export const selectOffers = (state: RootState) => state.offerList.list;
 

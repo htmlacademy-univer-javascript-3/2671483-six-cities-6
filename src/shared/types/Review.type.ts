@@ -1,4 +1,4 @@
-import { User } from './User.type';
+import { User } from './user.type';
 
 export interface IReview {
   id: string;

@@ -3,13 +3,13 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { fetchOffersAction } from '../entities/offer/model/offers.thunks';
 import { checkAuthAction } from '../entities/user/model/user.thunks';
 import { useAppDispatch } from '../shared/lib/hooks/redux';
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateRoute from './routes/private-route';
 
-import FavoritesPage from '../pages/FavoritesPage';
-import LoginPage from '../pages/LoginPage';
-import MainPage from '../pages/MainPage';
-import NotFoundPage from '../pages/NotFoundPage';
-import OfferPage from '../pages/OfferPage';
+import FavoritesPage from '../pages/favorites-page';
+import LoginPage from '../pages/login-page';
+import MainPage from '../pages/main-page';
+import NotFoundPage from '../pages/not-found-page';
+import OfferPage from '../pages/offer-page';
 
 import { LIMIT } from '../shared/config/const';
 import { AppRoute } from '../shared/config/route';

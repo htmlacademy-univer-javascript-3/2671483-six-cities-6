@@ -1,9 +1,9 @@
 import 'leaflet/dist/leaflet.css';
 import { CSSProperties, memo, useRef } from 'react';
-import useMap from '../model/useMap';
+import useMap from '../model/use-map';
 
-import type { MapPoint } from '../../../shared/types/Map.type';
-import type { City, Offer, Offers } from '../../../shared/types/Offer.type';
+import type { MapPoint } from '../../../shared/types/map.type';
+import type { City, Offer, Offers } from '../../../shared/types/offer.type';
 
 type MapProps = {
   currentCity?: City;

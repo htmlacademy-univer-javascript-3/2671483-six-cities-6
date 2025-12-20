@@ -1,4 +1,4 @@
-import { RatingTitle } from '../types/Review.type';
+import { RatingTitle } from '../types/review.type';
 
 export const ALL_CITIES = [
   'Paris',
@@ -9,7 +9,7 @@ export const ALL_CITIES = [
   'Dusseldorf',
 ] as const;
 
-export const DEFAULT_CITY: typeof ALL_CITIES[number] = 'Paris';
+export const DEFAULT_CITY: (typeof ALL_CITIES)[number] = 'Paris';
 
 export const LIMIT = 8;
 
@@ -27,7 +27,7 @@ export const SORT_OPTIONS = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
-  'Top rated first'
+  'Top rated first',
 ] as const;
 
 export const URL_MARKER_DEFAULT =

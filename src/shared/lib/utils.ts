@@ -1,5 +1,5 @@
 import { AppRoute } from '../config/route';
-import { Offers } from '../types/Offer.type';
+import { Offers } from '../types/offer.type';
 
 export const getOfferPath = (id: string | number) =>
   AppRoute.Offer.replace(':offerId', String(id));

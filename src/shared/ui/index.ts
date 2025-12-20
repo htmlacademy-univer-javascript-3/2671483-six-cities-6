@@ -1,7 +1,7 @@
-export { Price } from './Price';
+export { Price } from './price';
 
-export { Mark } from './Mark';
+export { Mark } from './mark';
 
-export { default as Logo } from './Logo';
+export { default as Logo } from './logo';
 
-export { default as RatingStars } from './RatingStars';
+export { default as RatingStars } from './rating-stars';

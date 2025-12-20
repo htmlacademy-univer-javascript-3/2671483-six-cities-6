@@ -9,7 +9,7 @@ import { getErrorMessage } from '../lib/error-formatter';
 import { getToken } from '../lib/storage/token';
 import { shouldDisplayError } from './api-error-utils';
 
-import type { DetailErrorData } from '../types/Error.type';
+import type { DetailErrorData } from '../types/error.type';
 
 export const createApi = (): AxiosInstance => {
   const api = axios.create({

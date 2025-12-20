@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { DetailErrorData } from '../types/Error.type';
+import { DetailErrorData } from '../types/error.type';
 
 export const getErrorMessage = (error: AxiosError<DetailErrorData>): string => {
   if (error.response?.data) {

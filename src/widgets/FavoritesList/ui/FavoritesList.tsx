@@ -45,13 +45,15 @@ export function FavoritesList(): JSX.Element {
                 </a>
               </div>
             </div>
-            {groupedOffers[cityName].map((offer) => (
-              <PlaceCard
-                key={offer.id}
-                offer={offer}
-                orientation="horizontal"
-              />
-            ))}
+            <div className="favorites__places">
+              {groupedOffers[cityName].map((offer) => (
+                <PlaceCard
+                  key={offer.id}
+                  offer={offer}
+                  orientation="horizontal"
+                />
+              ))}
+            </div>
           </li>
         ))}
       </ul>

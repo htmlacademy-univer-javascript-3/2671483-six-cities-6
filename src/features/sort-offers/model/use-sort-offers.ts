@@ -4,10 +4,11 @@ import { useAppSelector } from '../../../shared/lib/hooks/redux';
 import { changeSortOption } from './sort-offers-slice';
 
 import { SORT_OPTIONS } from '../../../shared/config/const';
+import { selectActiveSort } from './sort-offers.selectors';
 
 export function useSortOffers() {
   const dispatch = useDispatch();
-  const activeSort = useAppSelector((state) => state.sortOffers.sortOption);
+  const activeSort = useAppSelector(selectActiveSort);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 

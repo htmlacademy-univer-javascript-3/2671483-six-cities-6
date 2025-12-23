@@ -3,12 +3,14 @@ import { useCallback, useState } from 'react';
 import { Header } from '../../widgets/header';
 import { MainContent } from '../../widgets/main-content';
 
+import { selectIsOffersLoading } from '../../entities/offer/model/offers.selectors';
 import { CitySelector } from '../../features/city-selector';
+import { selectSortedOffers } from '../../features/sort-offers/model/sort-offers.selectors';
 
 import { useAppSelector } from '../../shared/lib/hooks/redux';
 import { Loader } from '../../shared/ui/loader';
 
-import { selectSortedOffers } from '../../features/sort-offers/model/sort-offers.selectors';
+import { selectCurrentCity } from '../../features/city-selector/model/city-selector.selectors';
 import type { Offer } from '../../shared/types/offer.type';
 
 type MainPageProps = {
@@ -17,8 +19,8 @@ type MainPageProps = {
 
 function MainPage({ limit }: MainPageProps) {
   const offers = useAppSelector(selectSortedOffers);
-  const { isLoading } = useAppSelector((state) => state.offerList);
-  const selectedCity = useAppSelector((state) => state.city.city);
+  const isLoading = useAppSelector(selectIsOffersLoading);
+  const selectedCity = useAppSelector(selectCurrentCity);
   const [selectedPoint, setSelectedPoint] = useState<Offer['id'] | undefined>(
     undefined
   );

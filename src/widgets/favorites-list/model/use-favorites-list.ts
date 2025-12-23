@@ -1,3 +1,8 @@
+import {
+  selectFavorites,
+  selectFavoritesHasError,
+  selectIsFavoritesLoading,
+} from '../../../features/favorites/model/favorites.selectors';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
 
 import type { Offers } from '../../../shared/types/offer.type';
@@ -17,12 +22,12 @@ const groupOffersByCity = (offers: Offers): GroupedOffers =>
   }, {});
 
 export const useFavoritesList = () => {
-  const { isLoading, hasError, list } = useAppSelector(
-    (state) => state.favoritesOffers
-  );
+  const favoritesOffers = useAppSelector(selectFavorites);
+  const isLoading = useAppSelector(selectIsFavoritesLoading);
+  const hasError = useAppSelector(selectFavoritesHasError);
 
-  const isFavoritesEmpty = list.length === 0;
-  const groupedOffers = groupOffersByCity(list);
+  const isFavoritesEmpty = favoritesOffers.length === 0;
+  const groupedOffers = groupOffersByCity(favoritesOffers);
   const cityNames = Object.keys(groupedOffers);
 
   return {

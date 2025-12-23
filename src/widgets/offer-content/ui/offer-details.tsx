@@ -1,13 +1,16 @@
-import { BookmarkButton } from '../../../features/favorites';
-import { Mark, Price, RatingStars } from '../../../shared/ui';
-import ReviewList from '../../review-list/ui/review-list';
-
 import { memo } from 'react';
+import ReviewList from '../../review-list/ui/review-list';
+import { selectReviewsCount } from '../model/offer-details.selectors';
+
+import { BookmarkButton } from '../../../features/favorites';
 import ReviewForm from '../../../features/review-form';
+
 import { AuthorizationStatus } from '../../../shared/config/auth-status';
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
-import type { FullOffer } from '../../../shared/types/offer.type';
 import { IReview } from '../../../shared/types/review.type';
+import { Mark, Price, RatingStars } from '../../../shared/ui';
+
+import type { FullOffer } from '../../../shared/types/offer.type';
 
 type OfferDetailsProps = {
   offer: FullOffer;
@@ -15,6 +18,7 @@ type OfferDetailsProps = {
 };
 
 function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
+  const reviewCount = useAppSelector(selectReviewsCount);
   const authorizationStatus = useAppSelector(
     (state) => state.user.authorizationStatus
   );
@@ -84,7 +88,7 @@ function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
         </div>
         {/* === {} === */}
         <section className="offer__reviews reviews">
-          <ReviewList reviews={reviews} />
+          <ReviewList reviews={reviews} reviewCount={reviewCount} />
           {isAuth && <ReviewForm />}
         </section>
       </div>

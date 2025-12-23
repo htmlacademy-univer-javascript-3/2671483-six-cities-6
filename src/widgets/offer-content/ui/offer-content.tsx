@@ -6,6 +6,12 @@ import Map from '../../map/ui';
 
 import { useMemo } from 'react';
 import { getLimitedPoints } from '../../../shared/lib/utils';
+import {
+  selectIsOfferLoading,
+  selectOffer,
+  selectOfferHasError,
+  selectSortedReviews,
+} from '../model/offer-details.selectors';
 import { OfferDetails } from './offer-details';
 
 type OfferDetailsProps = {
@@ -17,9 +23,10 @@ export function OfferContent({
   points,
   selectedPoint,
 }: OfferDetailsProps): JSX.Element {
-  const { isLoading, hasError, offer, reviews } = useAppSelector(
-    (state) => state.offer
-  );
+  const offer = useAppSelector(selectOffer);
+  const reviews = useAppSelector(selectSortedReviews);
+  const isLoading = useAppSelector(selectIsOfferLoading);
+  const hasError = useAppSelector(selectOfferHasError);
 
   const limitedPoints = useMemo(() => getLimitedPoints(3, points), [points]);
 

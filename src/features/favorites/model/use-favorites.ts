@@ -13,7 +13,7 @@ export const useFavorites = (offerId: string, isFavorite: 0 | 1) => {
   const isAuth = useAppSelector(selectIsAuthorized);
 
   const toggleFavorite = () => {
-    if (isAuth) {
+    if (!isAuth) {
       navigate(AppRoute.Login);
       return;
     }

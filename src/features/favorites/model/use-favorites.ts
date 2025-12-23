@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { AuthorizationStatus } from '../../../shared/config/auth-status';
+import { selectIsAuthorized } from '../../../entities/user/model/user.selectors';
 import { AppRoute } from '../../../shared/config/route';
 import {
   useAppDispatch,
@@ -10,12 +10,10 @@ import { toggleFavoriteAction } from './favorites.thunks';
 export const useFavorites = (offerId: string, isFavorite: 0 | 1) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector(
-    (state) => state.user.authorizationStatus
-  );
+  const isAuth = useAppSelector(selectIsAuthorized);
 
   const toggleFavorite = () => {
-    if (authorizationStatus !== AuthorizationStatus.Auth) {
+    if (isAuth) {
       navigate(AppRoute.Login);
       return;
     }

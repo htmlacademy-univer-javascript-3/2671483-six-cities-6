@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { getFavoriteOffers } from '../../../entities/offer/model/offers.selectors';
+import {
+  selectIsAuthorized,
+  selectUserData,
+} from '../../../entities/user/model/user.selectors';
 import { logoutAction } from '../../../entities/user/model/user.thunks';
-import { AuthorizationStatus } from '../../../shared/config/auth-status';
 import { AppRoute } from '../../../shared/config/route';
 import {
   useAppDispatch,
@@ -10,11 +13,10 @@ import {
 
 function UserNavigation() {
   const dispatch = useAppDispatch();
-  const { authorizationStatus, user } = useAppSelector((state) => state.user);
+  const user = useAppSelector(selectUserData);
+  const isAuth = useAppSelector(selectIsAuthorized);
   const favoriteOffers = useAppSelector(getFavoriteOffers);
   const favoriteCount = favoriteOffers.length;
-
-  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const handleSignOut = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();

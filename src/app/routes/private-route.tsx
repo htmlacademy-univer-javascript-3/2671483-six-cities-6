@@ -1,19 +1,14 @@
 import { Navigate, Outlet } from 'react-router-dom';
-
-import { AuthorizationStatus } from '../../shared/config/auth-status';
-import { AppRoute } from '../../shared/config/route';
 import { useAppSelector } from '../../shared/lib/hooks/redux';
 
-function PrivateRoute() {
-  const authorizationStatus = useAppSelector(
-    (state) => state.user.authorizationStatus
-  );
+import { selectIsAuthorized } from '../../entities/user/model/user.selectors';
 
-  return authorizationStatus === AuthorizationStatus.Auth ? (
-    <Outlet />
-  ) : (
-    <Navigate to={AppRoute.Login} />
-  );
+import { AppRoute } from '../../shared/config/route';
+
+function PrivateRoute() {
+  const isAuth = useAppSelector(selectIsAuthorized);
+
+  return isAuth ? <Outlet /> : <Navigate to={AppRoute.Login} />;
 }
 
 export default PrivateRoute;

@@ -5,12 +5,13 @@ import { selectReviewsCount } from '../model/offer-details.selectors';
 import { BookmarkButton } from '../../../features/favorites';
 import ReviewForm from '../../../features/review-form';
 
-import { AuthorizationStatus } from '../../../shared/config/auth-status';
+import { selectIsAuthorized } from '../../../entities/user/model/user.selectors';
+
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
-import { IReview } from '../../../shared/types/review.type';
 import { Mark, Price, RatingStars } from '../../../shared/ui';
 
 import type { FullOffer } from '../../../shared/types/offer.type';
+import type { IReview } from '../../../shared/types/review.type';
 
 type OfferDetailsProps = {
   offer: FullOffer;
@@ -19,10 +20,7 @@ type OfferDetailsProps = {
 
 function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
   const reviewCount = useAppSelector(selectReviewsCount);
-  const authorizationStatus = useAppSelector(
-    (state) => state.user.authorizationStatus
-  );
-  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuth = useAppSelector(selectIsAuthorized);
 
   return (
     <div className="offer__container container">

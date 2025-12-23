@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getFavoriteOffers } from '../../../entities/offer/model/offers.selectors';
 import { logoutAction } from '../../../entities/user/model/user.thunks';
 import { AuthorizationStatus } from '../../../shared/config/auth-status';
 import { AppRoute } from '../../../shared/config/route';
@@ -8,8 +9,10 @@ import {
 } from '../../../shared/lib/hooks/redux';
 
 function UserNavigation() {
-  const { authorizationStatus, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const { authorizationStatus, user } = useAppSelector((state) => state.user);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const favoriteCount = favoriteOffers.length;
 
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -31,7 +34,9 @@ function UserNavigation() {
               <span className="header__user-name user__name">
                 {user?.email}
               </span>
-              <span className="header__favorite-count">3</span>
+              {favoriteCount > 0 && (
+                <span className="header__favorite-count">{favoriteCount}</span>
+              )}
             </Link>
           </li>
         )}

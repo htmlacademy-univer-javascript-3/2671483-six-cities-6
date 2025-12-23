@@ -44,7 +44,7 @@ function UserNavigation() {
         )}
         <li className="header__nav-item">
           {isAuth ? (
-            <a className="header__nav-link" href="#" onClick={handleSignOut}>
+            <a className="header__nav-link" onClick={handleSignOut}>
               <span className="header__signout">Sign out</span>
             </a>
           ) : (

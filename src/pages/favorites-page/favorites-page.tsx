@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { fetchFavoritesAction } from '../../features/favorites/model/favorites.thunks';
 import { useAppDispatch } from '../../shared/lib/hooks/redux';
+import { Logo } from '../../shared/ui';
 import { FavoritesList } from '../../widgets/favorites-list';
 import { Header } from '../../widgets/header';
-
-// type FavoritesPageProps = {
-//   limit: number;
-// };
 
 function FavoritesPage() {
   const dispatch = useAppDispatch();
@@ -25,15 +22,7 @@ function FavoritesPage() {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width="64"
-            height="33"
-          />
-        </a>
+        <Logo block="footer" width={64} height={33} />
       </footer>
     </div>
   );

@@ -31,8 +31,13 @@ export const createApi = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<DetailErrorData>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        const errorMessage = getErrorMessage(error);
-        toast.error(errorMessage);
+        const isCheckAuth =
+          error.config?.url === '/login' && error.config?.method === 'get';
+
+        if (!isCheckAuth) {
+          const errorMessage = getErrorMessage(error);
+          toast.error(errorMessage);
+        }
       }
       throw error;
     }

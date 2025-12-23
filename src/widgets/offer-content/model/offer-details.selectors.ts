@@ -13,6 +13,11 @@ export const selectReviews = (state: RootState) => state.offer.reviews;
 export const selectIsOfferLoading = (state: RootState) => state.offer.isLoading;
 export const selectOfferHasError = (state: RootState) => state.offer.hasError;
 
+export const selectReviewsCount = createSelector(
+  [selectReviews],
+  (reviews) => reviews.length
+);
+
 export const selectSortedReviews = createSelector([selectReviews], (reviews) =>
   [...reviews]
     .sort((a, b) => {

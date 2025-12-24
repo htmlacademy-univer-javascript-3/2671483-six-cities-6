@@ -1,7 +1,7 @@
 import { FullOffer } from '../../types/offer.type';
 
 type hostProps = {
-  offer: FullOffer;
+  offer: Pick<FullOffer, 'host' | 'description'>;
 };
 
 export function Host({ offer }: hostProps): JSX.Element {

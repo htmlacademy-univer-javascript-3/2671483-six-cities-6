@@ -1,11 +1,5 @@
-import { OfferGallery } from '../../../entities/offer/ui/offer-gallery';
-import { useAppSelector } from '../../../shared/lib/hooks/redux';
-import type { Offer, Offers } from '../../../shared/types/offer.type';
-import { Loader } from '../../../shared/ui/loader';
-import Map from '../../map/ui';
-
 import { useMemo } from 'react';
-import { getLimitedPoints } from '../../../shared/lib/utils';
+import Map from '../../map/ui';
 import {
   selectIsOfferLoading,
   selectOffer,
@@ -13,6 +7,12 @@ import {
   selectSortedReviews,
 } from '../model/offer-details.selectors';
 import { OfferDetails } from './offer-details';
+
+import { useAppSelector } from '../../../shared/lib/hooks/redux';
+import { getLimitedPoints } from '../../../shared/lib/utils';
+import { Loader, OfferGallery } from '../../../shared/ui';
+
+import type { Offer, Offers } from '../../../shared/types/offer.type';
 
 type OfferDetailsProps = {
   points: Offers;

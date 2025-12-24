@@ -26,4 +26,4 @@ function Logo(props: logoProps) {
   );
 }
 
-export default Logo;
+export { Logo };

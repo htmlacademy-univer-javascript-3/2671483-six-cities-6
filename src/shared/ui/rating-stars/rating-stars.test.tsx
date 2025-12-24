@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import RatingStars from './index';
+import { RatingStars } from './index';
 
 describe('Component: RatingStars', () => {
   it('should render correctly with default props', () => {

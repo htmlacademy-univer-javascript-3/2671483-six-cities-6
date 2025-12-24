@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoute } from '../../config/route';
-import Logo from './index';
+import { Logo } from './index';
 
 describe('Component: Logo', () => {
   it('should render correctly with default props', () => {

@@ -1,4 +1,4 @@
-import RatingInput from '../../../shared/ui/rating-input';
+import { RatingInput } from '../../../shared/ui/rating-input';
 import { useReviewForm } from '../model/use-review-form';
 
 import { MIN_COMMENT_LENGTH, RATINGS } from '../../../shared/config/const';

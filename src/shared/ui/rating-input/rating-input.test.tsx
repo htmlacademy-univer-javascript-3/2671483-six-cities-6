@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import RatingInput from './index';
+import { RatingInput } from './index';
 
 describe('Component: RatingInput', () => {
   const expectedValue = 5;

@@ -32,4 +32,4 @@ function RatingInput({ value, title, checked, onChange }: StarsRatingProps) {
   );
 }
 
-export default RatingInput;
+export { RatingInput };

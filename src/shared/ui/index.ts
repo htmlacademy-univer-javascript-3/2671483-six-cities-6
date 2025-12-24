@@ -1,7 +1,19 @@
-export { Price } from './price';
+export { Host } from './host';
+
+export { InputWrapper } from './input-wrapper';
+
+export { Loader } from './loader';
+
+export { Logo } from './logo';
 
 export { Mark } from './mark';
 
-export { default as Logo } from './logo';
+export { OfferGallery } from './offer-gallery';
 
-export { default as RatingStars } from './rating-stars';
+export { OffersCount } from './offers-count';
+
+export { Price } from './price';
+
+export { RatingInput } from './rating-input';
+
+export { RatingStars } from './rating-stars';

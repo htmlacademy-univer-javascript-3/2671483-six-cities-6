@@ -9,12 +9,18 @@ import { OfferListWrapper } from '../../widgets/offer-list-wrapper';
 import { AppRoute } from '../../shared/config/route';
 import type { Offer } from '../../shared/types/offer.type';
 import { Loader } from '../../shared/ui/loader';
+import {
+  selectIsOfferLoading,
+  selectOfferHasError,
+  selectOffersNearby,
+} from '../../widgets/offer-content/model/offer-details.selectors';
 
 function OfferPage() {
   const dispatch = useAppDispatch();
   const { offerId } = useParams();
-  const offers = useAppSelector((state) => state.offer.offersNearby);
-  const { isLoading, hasError } = useAppSelector((state) => state.offer);
+  const offers = useAppSelector(selectOffersNearby);
+  const isLoading = useAppSelector(selectIsOfferLoading);
+  const hasError = useAppSelector(selectOfferHasError);
 
   useEffect(() => {
     if (offerId) {

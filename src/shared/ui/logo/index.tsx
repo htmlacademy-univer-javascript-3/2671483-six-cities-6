@@ -1,15 +1,29 @@
-function Logo() {
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../config/route';
+
+type logoProps = {
+  block?: 'header' | 'footer';
+  width?: number;
+  height?: number;
+};
+
+function Logo(props: logoProps) {
+  const { block = 'header', width = 81, height = 41 } = props;
+
   return (
-    <a className="header__logo-link header__logo-link--active">
+    <Link
+      to={AppRoute.Root}
+      className={`${block}__logo-link ${block}__logo-link--active`}
+    >
       <img
-        className="header__logo"
+        className={`${block}__logo`}
         src="img/logo.svg"
         alt="6 cities logo"
-        width="81"
-        height="41"
+        width={width}
+        height={height}
       />
-    </a>
+    </Link>
   );
 }
 
-export default Logo;
+export { Logo };

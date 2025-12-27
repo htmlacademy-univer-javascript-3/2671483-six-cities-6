@@ -1,6 +1,5 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { BookmarkButton } from '../../../features/favorites';
 import { getOfferPath } from '../../../shared/lib/utils';
 import { Mark, Price, RatingStars } from '../../../shared/ui';
 import { PlaceCardImage } from './place-card-image';
@@ -13,6 +12,7 @@ import type { Orientation } from '../../../shared/types/orientation.type';
 
 type PlaceCardProps = {
   offer: Offer;
+  renderBookmarkBtn: (offerId: string, isFavorite: 0 | 1) => JSX.Element;
   orientation?: Orientation;
   onHoverStart?: () => void;
   onHoverEnd?: () => void;
@@ -20,6 +20,7 @@ type PlaceCardProps = {
 
 function PlaceCard({
   offer,
+  renderBookmarkBtn,
   orientation = 'vertical',
   onHoverStart,
   onHoverEnd,
@@ -48,7 +49,7 @@ function PlaceCard({
       <div className={cn(currentView.infoClass, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <Price block="place-card">{offer.price}</Price>
-          <BookmarkButton offerId={offer.id} isFavorite={offer.isFavorite} />
+          {renderBookmarkBtn(offer.id, offer.isFavorite)}
         </div>
         <RatingStars rating={offer.rating} />
         <h2 className="place-card__name">

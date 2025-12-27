@@ -1,13 +1,18 @@
-import { BookmarkButton } from '../../../features/favorites';
-import { Mark, Price, RatingStars } from '../../../shared/ui';
-import ReviewList from '../../review-list/ui/review-list';
-
 import { memo } from 'react';
+import ReviewList from '../../review-list/ui/review-list';
+import { selectReviewsCount } from '../model/offer-details.selectors';
+
+import { BookmarkButton } from '../../../features/favorites';
 import ReviewForm from '../../../features/review-form';
-import { AuthorizationStatus } from '../../../shared/config/auth-status';
+
+import { selectIsAuthorized } from '../../../entities/user/model/user.selectors';
+
 import { useAppSelector } from '../../../shared/lib/hooks/redux';
+import { Mark, Price, RatingStars } from '../../../shared/ui';
+
 import type { FullOffer } from '../../../shared/types/offer.type';
-import { IReview } from '../../../shared/types/review.type';
+import type { IReview } from '../../../shared/types/review.type';
+import { Host } from '../../../shared/ui/host';
 
 type OfferDetailsProps = {
   offer: FullOffer;
@@ -15,10 +20,8 @@ type OfferDetailsProps = {
 };
 
 function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
-  const authorizationStatus = useAppSelector(
-    (state) => state.user.authorizationStatus
-  );
-  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const reviewCount = useAppSelector(selectReviewsCount);
+  const isAuth = useAppSelector(selectIsAuthorized);
 
   return (
     <div className="offer__container container">
@@ -48,43 +51,16 @@ function OfferDetails({ offer, reviews }: OfferDetailsProps): JSX.Element {
         <div className="offer__inside">
           <h2 className="offer__inside-title">What&apos;s inside</h2>
           <ul className="offer__inside-list">
-            <li className="offer__inside-item">Wi-Fi</li>
-            <li className="offer__inside-item">Washing machine</li>
-            <li className="offer__inside-item">Towels</li>
-            <li className="offer__inside-item">Heating</li>
-            <li className="offer__inside-item">Coffee machine</li>
-            <li className="offer__inside-item">Baby seat</li>
-            <li className="offer__inside-item">Kitchen</li>
-            <li className="offer__inside-item">Dishwasher</li>
-            <li className="offer__inside-item">Cabel TV</li>
-            <li className="offer__inside-item">Fridge</li>
+            {offer.goods.map((item) => (
+              <li key={item} className="offer__inside-item">
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
-        {/* === HOST === */}
-        <div className="offer__host">
-          <h2 className="offer__host-title">Meet the host</h2>
-          <div className="offer__host-user user">
-            <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-              <img
-                className="offer__avatar user__avatar"
-                src={offer.host.avatarUrl}
-                width="74"
-                height="74"
-                alt="Host avatar"
-              />
-            </div>
-            <span className="offer__user-name">{offer.host.name}</span>
-            {offer.host.isPro && (
-              <span className="offer__user-status">Pro</span>
-            )}
-          </div>
-          <div className="offer__description">
-            <p className="offer__text">{offer.description}</p>
-          </div>
-        </div>
-        {/* === {} === */}
+        <Host offer={offer} />
         <section className="offer__reviews reviews">
-          <ReviewList reviews={reviews} />
+          <ReviewList reviews={reviews} reviewCount={reviewCount} />
           {isAuth && <ReviewForm />}
         </section>
       </div>

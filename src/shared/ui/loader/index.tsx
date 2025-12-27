@@ -6,7 +6,7 @@ const loaderStyles = {
   alignItems: 'center',
   position: 'absolute',
   height: '100vh',
-  width: '100wh',
+  width: '100vw',
   inset: '0',
 } as CSSProperties;
 

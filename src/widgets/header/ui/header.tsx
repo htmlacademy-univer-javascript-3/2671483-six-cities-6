@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { UserNavigation } from '../../../features/user-navigation';
-import Logo from '../../../shared/ui/logo';
+import { Logo } from '../../../shared/ui/logo';
 
 type HeaderProps = {
   showNavigation?: boolean;

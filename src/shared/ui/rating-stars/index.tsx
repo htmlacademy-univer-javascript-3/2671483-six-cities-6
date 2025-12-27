@@ -22,4 +22,4 @@ function RatingStars({
   );
 }
 
-export default RatingStars;
+export { RatingStars };

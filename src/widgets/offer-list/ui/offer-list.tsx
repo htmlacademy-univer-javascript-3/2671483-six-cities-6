@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { PlaceCard } from '../../../entities/place-card';
 
+import { BookmarkButton } from '../../../features/favorites';
 import type { Offer, Offers } from '../../../shared/types/offer.type';
 import type { Orientation } from '../../../shared/types/orientation.type';
 
@@ -42,6 +43,9 @@ function OfferList({
         <PlaceCard
           key={info.id}
           offer={info}
+          renderBookmarkBtn={(id, isFavorite) => (
+            <BookmarkButton offerId={id} isFavorite={isFavorite} />
+          )}
           orientation={orientation}
           onHoverStart={() => handleCardEnter(info.id)}
           onHoverEnd={handleCardLeave}

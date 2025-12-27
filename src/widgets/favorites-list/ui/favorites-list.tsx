@@ -1,4 +1,5 @@
 import { PlaceCard } from '../../../entities/place-card';
+import { BookmarkButton } from '../../../features/favorites';
 import { Loader } from '../../../shared/ui/loader';
 import { useFavoritesList } from '../model/use-favorites-list';
 
@@ -48,6 +49,9 @@ export function FavoritesList(): JSX.Element {
             <div className="favorites__places">
               {groupedOffers[cityName].map((offer) => (
                 <PlaceCard
+                  renderBookmarkBtn={(id, isFavorite) => (
+                    <BookmarkButton offerId={id} isFavorite={isFavorite} />
+                  )}
                   key={offer.id}
                   offer={offer}
                   orientation="horizontal"

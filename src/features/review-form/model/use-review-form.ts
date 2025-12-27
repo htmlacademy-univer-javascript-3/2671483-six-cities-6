@@ -1,7 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch } from '../../../shared/lib/hooks/redux';
 
-import { MIN_COMMENT_LENGTH } from '../../../shared/config/const';
+import {
+  MAX_COMMENT_LENGTH,
+  MIN_COMMENT_LENGTH,
+} from '../../../shared/config/const';
 
 import type { Offer } from '../../../shared/types/offer.type';
 import type { ReviewData } from '../../../shared/types/review.type';
@@ -30,7 +33,8 @@ export const useReviewForm = (offerId: Offer['id']) => {
   const isValid =
     formData.rating > 0 &&
     formData.rating <= 5 &&
-    formData.comment.length >= MIN_COMMENT_LENGTH;
+    formData.comment.length >= MIN_COMMENT_LENGTH &&
+    formData.comment.length <= MAX_COMMENT_LENGTH;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();

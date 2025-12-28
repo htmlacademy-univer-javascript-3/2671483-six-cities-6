@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Offer } from '../../../shared/types/offer.type';
+import { vi } from 'vitest';
+import type { Offer } from '../../../shared/types/offer.type';
 import { PlaceCard } from './place-card';
 
 describe('Component: PlaceCard', () => {
@@ -28,7 +29,7 @@ describe('Component: PlaceCard', () => {
   it('should render correctly with offer data', () => {
     const expectedTitle = mockOffer.title;
     const expectedPrice = `€${mockOffer.price}`;
-    const expectedType = /Apartment/i;
+    const expectedType = /apartment/i;
 
     render(
       <MemoryRouter>
@@ -41,12 +42,14 @@ describe('Component: PlaceCard', () => {
     const typeElement = screen.getByText(expectedType);
     const premiumMark = screen.getByText(/Premium/i);
     const bookmarkElement = screen.getByTestId(bookmarkTestId);
+    const linkElement = screen.getByRole('link', { name: expectedTitle });
 
     expect(titleElement).toBeInTheDocument();
     expect(priceElement).toBeInTheDocument();
     expect(typeElement).toBeInTheDocument();
     expect(premiumMark).toBeInTheDocument();
     expect(bookmarkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute('href', `/offer/${mockOffer.id}`);
   });
 
   it('should not render premium mark when isPremium is false', () => {
@@ -59,7 +62,30 @@ describe('Component: PlaceCard', () => {
     );
 
     const premiumMark = screen.queryByText(/Premium/i);
-
     expect(premiumMark).not.toBeInTheDocument();
+  });
+
+  it('should call onHoverStart and onHoverEnd when mouse interaction occurs', () => {
+    const onHoverStart = vi.fn();
+    const onHoverEnd = vi.fn();
+
+    render(
+      <MemoryRouter>
+        <PlaceCard
+          offer={mockOffer}
+          renderBookmarkBtn={renderBookmark}
+          onHoverStart={onHoverStart}
+          onHoverEnd={onHoverEnd}
+        />
+      </MemoryRouter>
+    );
+
+    const card = screen.getByRole('article');
+
+    fireEvent.mouseEnter(card);
+    expect(onHoverStart).toHaveBeenCalledTimes(1);
+
+    fireEvent.mouseLeave(card);
+    expect(onHoverEnd).toHaveBeenCalledTimes(1);
   });
 });
